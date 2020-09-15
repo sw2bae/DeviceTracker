@@ -29,14 +29,15 @@ function LogIn() {
             <form onSubmit={logInHandler}>
                 <div className="form-group">
                     <label for="userId">User ID</label>
-                    <input type="email" className="form-control" name="userId" id="userId"></input>
+                    <input type="id" className="form-control" name="userId" id="userId"></input>
                 </div>
                 <div className="form-group">
                     <label for="password">Password</label>
                     <input type="password" className="form-control" name="password" id="password"></input>
                 </div>
-                <button type="submit" className="btn btn-outline-success mb-5">Log In</button>
+                <button type="submit" className="btn btn-outline-info mb-5">Log In</button>
             </form>
+            <p className="text-center alert alert-danger" role="alert" style={{ display: loginUnauth }}>Email and password pair not found</p>
         </main>
     );
 }

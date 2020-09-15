@@ -8,6 +8,11 @@ function SignUp() {
     function submitHandler(event) {
         event.preventDefault();
 
+        console.log(event.target.password.value);
+        console.log(event.target.password2.value);
+        console.log(event.target.userId.value);
+
+
         // Check each condition, email format, password length, and password matching
         // individually in regards to displaying error messages
 
@@ -47,7 +52,7 @@ function SignUp() {
             <form onSubmit={submitHandler}>
                 <div className="form-group">
                     <label for="userId">User ID</label>
-                    <input type="email" className="form-control" name="userId" id="userId"></input>
+                    <input type="text" className="form-control" name="userId" id="userId"></input>
                 </div>
                 <div className="form-group">
                     <label for="password">Password</label>
@@ -55,7 +60,9 @@ function SignUp() {
                     <label for="password">Confirm Password</label>
                     <input type="password" className="form-control" name="password2" id="password2"></input>
                 </div>
-                <button type="submit" className="btn btn-outline-success mb-5">Submit</button>
+                <button type="submit" className="btn btn-outline-info mb-5">Submit</button>
+                <p className="text-center alert alert-danger" role="alert" style={{ display: passwordErrorVis }}>Passwords don't match. Re-enter password</p>
+                <p className="text-center alert alert-danger" role="alert" style={{ display: passwordLengthVis }}>Password must contain at least 6 characters</p>
             </form>
         </main>
     );
