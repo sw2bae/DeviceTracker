@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import API from "../utils/API";
+import Header from "../components/header";
 import In from "../components/in";
 import Out from "../components/out";
 
@@ -10,10 +11,13 @@ function Main() {
 
 
     return (
-        <main className="card mt-5">
-            <In />
-            <Out />
-        </main>
+        <>
+            <Header />
+            <main className="card mt-3">
+                <In />
+                <Out />
+            </main>
+        </>
     );
 }
 

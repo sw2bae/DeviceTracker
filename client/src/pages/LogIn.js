@@ -10,10 +10,6 @@ function LogIn() {
     function logInHandler(event) {
         event.preventDefault();
 
-        console.log(event.target.password.value);
-        console.log(event.target.userId.value);
-        console.log(loginUnauth);
-
         API.logIn({
             userId: event.target.userId.value,
             password: event.target.password.value

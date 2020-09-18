@@ -15,7 +15,6 @@ export default {
 
     checkAuth: async function () {
         const { data } = await axios.get("api/checkAuthentication");
-
         return data;
     }
 };

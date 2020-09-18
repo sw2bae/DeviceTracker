@@ -31,10 +31,11 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={LogIn} />
-          {/* <ProtectedRoute exact={true} path="/signup/" component={SignUp} isAuthenticated={this.state.isAuthenticated} /> */}
           <Route path="/signup/" component={SignUp} />
           <Route path="/main/" component={Main} />
           <Route path="/log/" component={Log} />
+          {/* <ProtectedRoute exact={true} path="/main/" component={Main} isAuthenticated={this.state.isAuthenticated} />
+          <ProtectedRoute exact={true} path="/log/" component={Log} isAuthenticated={this.state.isAuthenticated} /> */}
         </Switch>
         <Footer />
       </Router >
