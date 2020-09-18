@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import Footer from "./components/footer";
-import API from "./utils/API";
+// import API from "./utils/API";
+import Main from "./pages/Main";
+import Log from "./pages/Log";
 
 class App extends Component {
   // const [user, setUser] = useState();
@@ -31,9 +33,11 @@ class App extends Component {
           <Route exact path="/" component={LogIn} />
           {/* <ProtectedRoute exact={true} path="/signup/" component={SignUp} isAuthenticated={this.state.isAuthenticated} /> */}
           <Route path="/signup/" component={SignUp} />
+          <Route path="/main/" component={Main} />
+          <Route path="/log/" component={Log} />
         </Switch>
         <Footer />
-      </Router>
+      </Router >
 
     );
   }

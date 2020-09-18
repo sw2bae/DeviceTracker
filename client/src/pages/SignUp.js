@@ -8,9 +8,9 @@ function SignUp() {
     function submitHandler(event) {
         event.preventDefault();
 
-        console.log(event.target.password.value);
-        console.log(event.target.password2.value);
-        console.log(event.target.userId.value);
+        // console.log(event.target.password.value);
+        // console.log(event.target.password2.value);
+        // console.log(event.target.userId.value);
 
 
         // Check each condition, email format, password length, and password matching

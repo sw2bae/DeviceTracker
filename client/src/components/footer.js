@@ -26,7 +26,7 @@ function Footer() {
         <div>
             <div style={phantom} />
             <div style={style}>
-                sw2.bae@samsung.com
+                Contact : sw2.bae@samsung.com
             </div>
         </div>
     )

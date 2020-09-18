@@ -9,17 +9,23 @@ function LogIn() {
 
     function logInHandler(event) {
         event.preventDefault();
+
+        console.log(event.target.password.value);
+        console.log(event.target.userId.value);
+        console.log(loginUnauth);
+
         API.logIn({
             userId: event.target.userId.value,
             password: event.target.password.value
         })
             .then(() => {
-                window.location.replace("/home");
+                window.location.replace("/main");
                 console.log("success");
             })
             .catch(() => {
                 setLoginUnauth("block");
             });
+        console.log(loginUnauth);
     }
 
     return (
@@ -29,7 +35,7 @@ function LogIn() {
             <form onSubmit={logInHandler}>
                 <div className="form-group">
                     <label for="userId">User ID</label>
-                    <input type="id" className="form-control" name="userId" id="userId"></input>
+                    <input type="text" className="form-control" name="userId" id="userId"></input>
                 </div>
                 <div className="form-group">
                     <label for="password">Password</label>
