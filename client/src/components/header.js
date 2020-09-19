@@ -5,12 +5,30 @@ import API from "../utils/API";
 
 function Header() {
 
+    const [btnStatus, setbtnStatus] = useState("main");
+
     async function handleLogout(event) {
         event.preventDefault();
 
         await API.logOut();
         window.location.replace("/");
     }
+
+    async function logBtn(event) {
+        event.preventDefault();
+
+        // await API.logOut();
+        setbtnStatus("log");
+        window.location.replace("/log");
+    }
+    async function mainBtn(event) {
+        event.preventDefault();
+
+        // await API.logOut();
+        setbtnStatus("main");
+        window.location.replace("/main");
+    }
+
 
     const [currentUser, setCurrentUser] = useState({});
     useEffect(() => {
@@ -24,9 +42,12 @@ function Header() {
 
     return (
         <>
-            <header className="container">
-                <p className="mt-3">Welcome [{currentUser.userId}]</p>
-                <button type="button" className="" onClick={handleLogout}>Log Out</button>
+            <header className="container mt-3">
+                <div className="row">
+                    <h3 className="col">Welcome [{currentUser.userId}]</h3>
+                    <button type="button" className="btn btn-info col-2-sm mr-3" onClick={handleLogout}>Log Out</button>
+                    <button type="button" className="btn btn-danger col-2-sm mr-3" onClick={logBtn}>Log</button>
+                </div>
             </header>
         </>
     );

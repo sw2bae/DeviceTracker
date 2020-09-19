@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import API from "../utils/API";
+import Header from "../components/header";
 
 
 
@@ -9,9 +10,12 @@ function Log() {
 
 
     return (
-        <main className="card mt-5">
+        <>
+            <Header />
+            <main className="card mt-3">
 
-        </main>
+            </main>
+        </>
     );
 }
 

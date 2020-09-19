@@ -4,8 +4,9 @@ import React from "react";
 function In() {
 
     return (
-        <>
-        </>
+        <main className="container card mt-5 mb-5">
+            In
+        </main>
     )
 }
 
