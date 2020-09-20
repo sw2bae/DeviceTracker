@@ -14,8 +14,14 @@ function Main() {
         <>
             <Header />
             <main className="card mt-3">
-                <In />
-                <Out />
+                <div className=" container">
+                    <div className="row">
+                        <In />
+                        <div className="col-sm-1">
+                        </div>
+                        <Out />
+                    </div>
+                </div>
             </main>
         </>
     );

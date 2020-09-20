@@ -16,5 +16,15 @@ export default {
     checkAuth: async function () {
         const { data } = await axios.get("api/checkAuthentication");
         return data;
+    },
+    locationAdd: async function (userdata) {
+        const data = await axios.post("/api/location", userdata);
+        console.log(data.config.data);
+        return data.config.data;
     }
+    // ,
+    // inCount: async function () {
+    //     await axios.get('api/incount');
+    //     return console.log("In Counted");
+    // }
 };

@@ -4,7 +4,7 @@ import React from "react";
 function Out() {
 
     return (
-        <main className="container card mt-5 mb-5">
+        <main className="card mt-5 mb-5 col-sm">
             Out
         </main>
     )

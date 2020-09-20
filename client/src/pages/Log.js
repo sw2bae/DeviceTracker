@@ -13,7 +13,9 @@ function Log() {
         <>
             <Header />
             <main className="card mt-3">
-
+                <p className="container card mt-5 mb-5">
+                    Log
+                </p>
             </main>
         </>
     );

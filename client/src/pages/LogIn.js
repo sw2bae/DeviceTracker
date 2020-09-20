@@ -16,12 +16,10 @@ function LogIn() {
         })
             .then(() => {
                 window.location.replace("/main");
-                console.log("success");
             })
             .catch(() => {
                 setLoginUnauth("block");
             });
-        console.log(loginUnauth);
     }
 
     return (
