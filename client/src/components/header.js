@@ -16,7 +16,6 @@ function Header() {
     const [currentUser, setCurrentUser] = useState({});
     useEffect(() => {
         const fetchData = async () => {
-
             const { user } = await API.checkAuth();
             setCurrentUser(user);
         };

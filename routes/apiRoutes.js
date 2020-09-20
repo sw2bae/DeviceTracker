@@ -39,22 +39,34 @@ apiRoutes.get("/checkAuthentication", isAuthenticated, (req, res) => {
     });
 });
 
-apiRoutes.post("/location", async (req, res) => {
+apiRoutes.post("/locationadd", async (req, res) => {
     const locationAdd = await db.Location.create(req.body);
     console.log(req.body);
     res.json(locationAdd);
 })
 
-// apiRoutes.get("/incount", async (req, res) => {
-//     const count = await db.Location.findAll({
-//         where: {
-//             location: "Aging Room"
-//         }
-//     }
-//     );
-//     res.send(count);
-// })
+apiRoutes.get("/locationread", async (req, res) => {
+    const count = await db.Location.findAll({
+        attributes: [
+            'qty'
+        ],
+        where: {
+            location: "Aging Room"
+        }
+    });
+    res.send(count);
+});
 
+apiRoutes.put("/locationupdate", async (req, res) => {
+    const countUpdate = await db.Location.update(req.body, {
+        where: {
+            location: "Aging Room"
+        }
+    });
+    console.log(countUpdate);
+    res.json(countUpdate);
+
+})
 
 
 

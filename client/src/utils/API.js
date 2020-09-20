@@ -18,13 +18,20 @@ export default {
         return data;
     },
     locationAdd: async function (userdata) {
-        const data = await axios.post("/api/location", userdata);
-        console.log(data.config.data);
+        const data = await axios.post("/api/locationadd", userdata);
         return data.config.data;
+    },
+    locationRead: async function () {
+        const { data } = await axios.get('api/locationread');
+        if (data.length === 0) {
+            return "none";
+        } else {
+            return data[0].qty;
+        }
+    },
+    locationUpdate: async function (userdata) {
+        const data = await axios.put("api/locationupdate", userdata);
+        return data;
     }
-    // ,
-    // inCount: async function () {
-    //     await axios.get('api/incount');
-    //     return console.log("In Counted");
-    // }
+
 };
