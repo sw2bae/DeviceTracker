@@ -26,7 +26,15 @@ export default {
         if (data.length === 0) {
             return "none";
         } else {
-            return data[0].qty;
+            let inventory = {};
+
+            for (let i = 0; i < data.length; i++) {
+                let key = data[i].location;
+                let value = data[i].qty;
+                inventory[key] = value;
+            }
+            // console.log(inventory);
+            return inventory;
         }
     },
     locationUpdate: async function (userdata) {

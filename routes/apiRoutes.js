@@ -41,18 +41,15 @@ apiRoutes.get("/checkAuthentication", isAuthenticated, (req, res) => {
 
 apiRoutes.post("/locationadd", async (req, res) => {
     const locationAdd = await db.Location.create(req.body);
-    console.log(req.body);
     res.json(locationAdd);
 })
 
 apiRoutes.get("/locationread", async (req, res) => {
     const count = await db.Location.findAll({
         attributes: [
+            'location',
             'qty'
-        ],
-        where: {
-            location: "Aging Room"
-        }
+        ]
     });
     res.send(count);
 });
@@ -60,10 +57,10 @@ apiRoutes.get("/locationread", async (req, res) => {
 apiRoutes.put("/locationupdate", async (req, res) => {
     const countUpdate = await db.Location.update(req.body, {
         where: {
-            location: "Aging Room"
+            location: req.body.location
         }
     });
-    console.log(countUpdate);
+    // console.log(countUpdate);
     res.json(countUpdate);
 
 })

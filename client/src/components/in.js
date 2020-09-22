@@ -4,43 +4,47 @@ import API from "../utils/API";
 
 function In() {
 
+    const [inventory, setInventory] = useState("none");
 
-    const [currentInCount, setCurrentInCount] = useState("none");
-
-    const qtyCount = async () => {
+    const inventoryCount = async () => {
         const count = await API.locationRead();
-        setCurrentInCount(count);
+        setInventory(count);
+        // console.log(inventory);
     };
 
     useEffect(() => {
-        qtyCount();
+        inventoryCount();
     }, []);
 
     async function plusBtn(e) {
         e.preventDefault();
+        const location = e.target.value;
         const addQty = prompt("(+) Please Enter Qty : ");
-        if (currentInCount === "none") {
+        if (inventory === "none") {
             await API.locationAdd({
-                location: "Aging Room",
+                location: location,
                 qty: addQty
             });
         } else {
             await API.locationUpdate({
-                qty: parseInt(currentInCount) + parseInt(addQty)
+                location: location,
+                qty: parseInt(inventory[location]) + parseInt(addQty)
             });
         }
-        qtyCount();
+        inventoryCount();
     };
 
     async function minusBtn(e) {
         e.preventDefault();
+        const location = e.target.value;
         const subtractQty = prompt("(-) Please Enter Qty : ");
 
         await API.locationUpdate({
-            qty: parseInt(currentInCount) - parseInt(subtractQty)
+            location: location,
+            qty: parseInt(inventory[location]) - parseInt(subtractQty)
         });
 
-        qtyCount();
+        inventoryCount();
     };
 
 
@@ -49,12 +53,12 @@ function In() {
             <p className="text-center mt-3">Aging Room</p>
             <div className="container">
                 <div className="row">
-                    <button type="button" class="btn btn-outline-info mb-3 col" onClick={plusBtn}>+</button>
+                    <button type="button" class="btn btn-outline-info mb-3 col" onClick={plusBtn} value="Aging Room">+</button>
                     <div className="col-1" />
-                    <button type="button" class="btn btn-outline-primary mb-3 col" onClick={minusBtn}>-</button>
+                    <button type="button" class="btn btn-outline-primary mb-3 col" onClick={minusBtn} value="Aging Room">-</button>
                 </div>
             </div>
-            <h1 className="text-center">{currentInCount}</h1>
+            <h1 className="text-center">{inventory["Aging Room"]}</h1>
 
         </main>
     )
