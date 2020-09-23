@@ -9,6 +9,31 @@ import Out from "../components/out";
 
 function Main() {
 
+    function dragStart(e) {
+        console.log("DragStart");
+        e.target.className += " bg-dark text-white";
+    };
+    function dragEnd(e) {
+        console.log("DragEnd");
+        e.target.className = "font-weight-bold text-center mt-3 border rounded";
+    };
+    function dragOver(e) {
+        e.preventDefault();
+        console.log("DragOver");
+    };
+    function dragEnter(e) {
+        // e.preventDefault();
+        console.log("DragEnter");
+    };
+    function dragLeave(e) {
+        // e.preventDefault();
+        console.log("DragLeave");
+    };
+    function dragDrop(e) {
+        // e.preventDefault();
+        console.log("DragDrop");
+    };
+
 
     return (
         <>
@@ -16,10 +41,10 @@ function Main() {
             <main className="card mt-3">
                 <div className=" container">
                     <div className="row">
-                        <In />
+                        <In onDragStart={dragStart} onDragEnd={dragEnd} onDragOver={dragOver} onDragEnter={dragEnter} onDragLeave={dragLeave} onDragDrop={dragDrop} />
                         <div className="col-sm-1">
                         </div>
-                        <Out />
+                        <Out onDragStart={dragStart} onDragEnd={dragEnd} onDragOver={dragOver} onDragEnter={dragEnter} onDragLeave={dragLeave} onDragDrop={dragDrop} />
                     </div>
                 </div>
             </main>

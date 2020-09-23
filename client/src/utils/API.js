@@ -33,7 +33,6 @@ export default {
                 let value = data[i].qty;
                 inventory[key] = value;
             }
-            // console.log(inventory);
             return inventory;
         }
     },

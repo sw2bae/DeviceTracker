@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import API from "../utils/API";
 // import { Link, useLocation } from "react-router-dom";
 
-function In() {
+function In({ onDragStart, onDragEnd, onDragOver, onDragEnter, onDragLeave, onDragDrop }) {
 
     const [inventory, setInventory] = useState("none");
 
@@ -47,10 +47,9 @@ function In() {
         inventoryCount();
     };
 
-
     return (
         <main className="card mt-5 mb-5 col-sm-2">
-            <p className="text-center mt-3">Aging Room</p>
+            <p className="font-weight-bold text-center mt-3 border rounded" draggable="true" id="Aging Room" value={inventory["Aging Room"]} onDragStart={onDragStart} onDragEnd={onDragEnd} onDragOver={onDragOver} onDragEnter={onDragEnter} onDragLeave={onDragLeave} onDrop={onDragDrop}  >Aging Room</p>
             <div className="container">
                 <div className="row">
                     <button type="button" class="btn btn-outline-info mb-3 col" onClick={plusBtn} value="Aging Room">+</button>
