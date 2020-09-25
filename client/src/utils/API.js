@@ -1,4 +1,5 @@
 import axios from "axios";
+import { use } from "passport";
 export default {
     signUp: async function (userdata) {
         const data = await axios.post("/api/signup", userdata);
@@ -38,6 +39,10 @@ export default {
     },
     locationUpdate: async function (userdata) {
         const data = await axios.put("api/locationupdate", userdata);
+        return data;
+    },
+    locationDelete: async function (userdata) {
+        const data = await axios.delete("api/locationdelete", userdata);
         return data;
     }
 

@@ -10,6 +10,7 @@ function Main() {
     const [inventory, setInventory] = useState("none");
     var firstLocation;
     var secondLocation;
+    const locationsArray = (Object.keys(inventory));
 
     const inventoryCount = async () => {
         const count = await API.locationRead();
@@ -42,12 +43,17 @@ function Main() {
         e.preventDefault();
         const location = e.target.value;
         const subtractQty = prompt("(-) Please Enter Qty : ");
-
-        await API.locationUpdate({
-            location: location,
-            qty: parseInt(inventory[location]) - parseInt(subtractQty)
-        });
-
+        console.log(location);
+        if (!locationsArray.includes("Aging Room")) {
+            alert("No Stock")
+        } else if (parseInt(inventory[location]) - parseInt(subtractQty) < 0) {
+            alert("Wrong QTY Input");
+        } else {
+            await API.locationUpdate({
+                location: location,
+                qty: parseInt(inventory[location]) - parseInt(subtractQty)
+            });
+        }
         inventoryCount();
     };
 
@@ -60,7 +66,12 @@ function Main() {
     function dragEnd(e) {
         e.preventDefault();
         console.log("Drag End : ", e.target.id);
-
+        if (e.target.id === "OutBound") {
+            e.target.className = "card mt-5 mb-5 col-sm";
+        } else {
+            e.target.className = "font-weight-bold text-center mt-3 border rounded";
+        }
+        inventoryCount();
     };
     function dragOver(e) {
         e.preventDefault();
@@ -70,7 +81,7 @@ function Main() {
         e.preventDefault();
         console.log("Drag Enter : ");
         if (e.target.id === "OutBound") {
-            e.target.className += " bg-dark text-white";
+            e.target.className += " bg-info text-white";
         } else {
             e.target.className += " bg-dark text-white";
         }
@@ -92,15 +103,16 @@ function Main() {
         secondLocation = e.target.id;
         console.log(firstLocation, secondLocation);
 
-        if (e.target.id === "OutBound") {
-            e.target.className = "card mt-5 mb-5 col-sm";
-        } else {
-            e.target.className = "font-weight-bold text-center mt-3 border rounded";
-        }
+        // if (e.target.id === "OutBound") {
+        //     e.target.className = "card mt-5 mb-5 col-sm";
+        // } else {
+        //     e.target.className = "font-weight-bold text-center mt-3 border rounded";
+        // }
 
         if (secondLocation === "OutBound") {
             const newLocation = prompt("Location : ")
             const addQty = prompt("QTY : ");
+            e.target.className = "card mt-5 mb-5 col-sm";
             await API.locationAdd({
                 location: newLocation,
                 qty: addQty
@@ -109,11 +121,15 @@ function Main() {
                     location: firstLocation,
                     qty: parseInt(inventory[firstLocation]) - parseInt(addQty)
                 })
+                inventoryCount();
             });
         } else if (firstLocation === secondLocation) {
+            e.target.className = "font-weight-bold text-center mt-3 border rounded";
+            inventoryCount();
             return;
         } else {
             const moveQty = prompt("QTY : ");
+            e.target.className = "font-weight-bold text-center mt-3 border rounded";
             await API.locationUpdate({
                 location: secondLocation,
                 qty: parseInt(inventory[secondLocation]) + parseInt(moveQty)
@@ -123,6 +139,7 @@ function Main() {
                     qty: parseInt(inventory[firstLocation]) - parseInt(moveQty)
                 })
             });
+            inventoryCount();
         }
         inventoryCount();
     };
