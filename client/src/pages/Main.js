@@ -47,7 +47,7 @@ function Main() {
         if (!locationsArray.includes("Aging Room")) {
             alert("No Stock")
         } else if (parseInt(inventory[location]) - parseInt(subtractQty) < 0) {
-            alert("Wrong QTY Input");
+            alert("Input QTY Error");
         } else {
             await API.locationUpdate({
                 location: location,
@@ -103,31 +103,51 @@ function Main() {
         secondLocation = e.target.id;
         console.log(firstLocation, secondLocation);
 
-        // if (e.target.id === "OutBound") {
-        //     e.target.className = "card mt-5 mb-5 col-sm";
-        // } else {
-        //     e.target.className = "font-weight-bold text-center mt-3 border rounded";
-        // }
 
         if (secondLocation === "OutBound") {
             const newLocation = prompt("Location : ")
             const addQty = prompt("QTY : ");
             e.target.className = "card mt-5 mb-5 col-sm";
-            await API.locationAdd({
-                location: newLocation,
-                qty: addQty
-            }).then(() => {
-                API.locationUpdate({
-                    location: firstLocation,
-                    qty: parseInt(inventory[firstLocation]) - parseInt(addQty)
-                })
-                inventoryCount();
-            });
-        } else if (firstLocation === secondLocation) {
+
+            if (locationsArray.includes(newLocation)) {
+                alert("Duplicated Location Input");
+            } else if (parseInt(inventory[firstLocation]) - parseInt(addQty) < 0) {
+                alert("Input QTY Error");
+            } else if (parseInt(inventory[firstLocation]) - parseInt(addQty) == 0 && firstLocation != "Aging Room") {
+                await API.locationAdd({
+                    location: newLocation,
+                    qty: addQty
+                }).then(() => {
+                    API.locationDelete(firstLocation);
+                    // inventoryCount();
+                });
+            } else {
+                await API.locationAdd({
+                    location: newLocation,
+                    qty: addQty
+                }).then(() => {
+                    API.locationUpdate({
+                        location: firstLocation,
+                        qty: parseInt(inventory[firstLocation]) - parseInt(addQty)
+                    });
+                    // inventoryCount();
+                });
+            }
+            inventoryCount();
+        }
+
+
+
+        else if (firstLocation === secondLocation) {
             e.target.className = "font-weight-bold text-center mt-3 border rounded";
             inventoryCount();
             return;
-        } else {
+        }
+
+
+
+
+        else {
             const moveQty = prompt("QTY : ");
             e.target.className = "font-weight-bold text-center mt-3 border rounded";
             await API.locationUpdate({

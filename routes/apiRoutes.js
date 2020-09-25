@@ -65,10 +65,11 @@ apiRoutes.put("/locationupdate", async (req, res) => {
 
 })
 
-apiRoutes.delete("/locationdelete", async (req, res) => {
+apiRoutes.delete("/locationdelete/:location", async (req, res) => {
+    console.log("DELETE LOG : ", req.params.location);
     const locationDelete = await db.Location.destroy({
         where: {
-            location: req.body.location
+            location: req.params.location
         }
     });
     res.json(locationDelete);

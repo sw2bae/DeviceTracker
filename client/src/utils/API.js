@@ -41,8 +41,8 @@ export default {
         const data = await axios.put("api/locationupdate", userdata);
         return data;
     },
-    locationDelete: async function (userdata) {
-        const data = await axios.delete("api/locationdelete", userdata);
+    locationDelete: async function (location) {
+        const data = await axios.delete(`api/locationdelete/${location}`);
         return data;
     }
 
