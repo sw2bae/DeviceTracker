@@ -47,7 +47,7 @@ function Main() {
         if (!locationsArray.includes("Aging Room")) {
             alert("No Stock")
         } else if (parseInt(inventory[location]) - parseInt(subtractQty) < 0) {
-            alert("Input QTY Error");
+            alert("QTY Input Error");
         } else {
             await API.locationUpdate({
                 location: location,
@@ -103,7 +103,6 @@ function Main() {
         secondLocation = e.target.id;
         console.log(firstLocation, secondLocation);
 
-
         if (secondLocation === "OutBound") {
             const newLocation = prompt("Location : ")
             const addQty = prompt("QTY : ");
@@ -111,8 +110,10 @@ function Main() {
 
             if (locationsArray.includes(newLocation)) {
                 alert("Duplicated Location Input");
+            } else if (inventory[firstLocation] == null) {
+                alert("No Stock");
             } else if (parseInt(inventory[firstLocation]) - parseInt(addQty) < 0) {
-                alert("Input QTY Error");
+                alert("QTY Input Error");
             } else if (parseInt(inventory[firstLocation]) - parseInt(addQty) == 0 && firstLocation != "Aging Room") {
                 await API.locationAdd({
                     location: newLocation,
@@ -135,30 +136,35 @@ function Main() {
             }
             inventoryCount();
         }
-
-
-
         else if (firstLocation === secondLocation) {
             e.target.className = "font-weight-bold text-center mt-3 border rounded";
             inventoryCount();
             return;
         }
-
-
-
-
         else {
             const moveQty = prompt("QTY : ");
             e.target.className = "font-weight-bold text-center mt-3 border rounded";
-            await API.locationUpdate({
-                location: secondLocation,
-                qty: parseInt(inventory[secondLocation]) + parseInt(moveQty)
-            }).then(() => {
-                API.locationUpdate({
-                    location: firstLocation,
-                    qty: parseInt(inventory[firstLocation]) - parseInt(moveQty)
+
+            if (parseInt(inventory[firstLocation]) - parseInt(moveQty) < 0) {
+                alert("QTY Input Error");
+            } else if (parseInt(inventory[firstLocation]) - parseInt(moveQty) == 0) {
+                await API.locationUpdate({
+                    location: secondLocation,
+                    qty: parseInt(inventory[secondLocation]) + parseInt(moveQty)
+                }).then(() => {
+                    API.locationDelete(firstLocation);
                 })
-            });
+            } else {
+                await API.locationUpdate({
+                    location: secondLocation,
+                    qty: parseInt(inventory[secondLocation]) + parseInt(moveQty)
+                }).then(() => {
+                    API.locationUpdate({
+                        location: firstLocation,
+                        qty: parseInt(inventory[firstLocation]) - parseInt(moveQty)
+                    })
+                });
+            }
             inventoryCount();
         }
         inventoryCount();
