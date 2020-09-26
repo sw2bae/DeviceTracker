@@ -47,7 +47,7 @@ function Main() {
         };
         API.logCreate({
             logInId: currentUser.userId,
-            location_1: "NEW",
+            location_1: "+",
             location_2: location,
             qty: addQty
         });
@@ -69,6 +69,12 @@ function Main() {
                 qty: parseInt(inventory[location]) - parseInt(subtractQty)
             });
         }
+        API.logCreate({
+            logInId: currentUser.userId,
+            location_1: "-",
+            location_2: location,
+            qty: subtractQty
+        });
         inventoryCount();
     };
 
@@ -84,7 +90,7 @@ function Main() {
         if (e.target.id === "OutBound") {
             e.target.className = "card mt-5 mb-5 col-sm";
         } else {
-            e.target.className = "font-weight-bold text-center mt-3 border rounded";
+            e.target.className = "font-weight-bold text-center mt-1 mb-1 border rounded";
         }
         inventoryCount();
     };
@@ -107,7 +113,7 @@ function Main() {
         if (e.target.id === "OutBound") {
             e.target.className = "card mt-5 mb-5 col-sm";
         } else {
-            e.target.className = "font-weight-bold text-center mt-3 border rounded";
+            e.target.className = "font-weight-bold text-center mt-1 mb-1 border rounded";
         }
     };
 
@@ -149,16 +155,22 @@ function Main() {
                     // inventoryCount();
                 });
             }
+            API.logCreate({
+                logInId: currentUser.userId,
+                location_1: firstLocation,
+                location_2: newLocation,
+                qty: addQty
+            });
             inventoryCount();
         }
         else if (firstLocation === secondLocation) {
-            e.target.className = "font-weight-bold text-center mt-3 border rounded";
+            e.target.className = "font-weight-bold text-center mt-1 mb-1 border rounded";
             inventoryCount();
             return;
         }
         else {
             const moveQty = prompt("QTY : ");
-            e.target.className = "font-weight-bold text-center mt-3 border rounded";
+            e.target.className = "font-weight-bold text-center mt-1 mb-1 border rounded";
 
             if (parseInt(inventory[firstLocation]) - parseInt(moveQty) < 0) {
                 alert("QTY Input Error");
@@ -179,7 +191,13 @@ function Main() {
                         qty: parseInt(inventory[firstLocation]) - parseInt(moveQty)
                     })
                 });
-            }
+            };
+            API.logCreate({
+                logInId: currentUser.userId,
+                location_1: firstLocation,
+                location_2: secondLocation,
+                qty: moveQty
+            });
             inventoryCount();
         }
         inventoryCount();
@@ -193,7 +211,7 @@ function Main() {
                     <LocationProvider value={inventory}>
                         <div className="row">
                             <In onDragStart={dragStart} onDragEnd={dragEnd} onDragOver={dragOver} onDragEnter={dragEnter} onDragLeave={dragLeave} onDragDrop={dragDrop} plusBtn={plusBtn} minusBtn={minusBtn} />
-                            <div className="col-sm-1">
+                            <div className="mr-3">
                             </div>
                             <Out onDragStart={dragStart} onDragEnd={dragEnd} onDragOver={dragOver} onDragEnter={dragEnter} onDragLeave={dragLeave} onDragDrop={dragDrop} />
                         </div>

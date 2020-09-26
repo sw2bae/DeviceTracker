@@ -8,12 +8,28 @@ import Header from "../components/header";
 
 function Log() {
 
+    const [currentUser, setCurrentUser] = useState({});
+    const [logData, setLogData] = useState();
+
+    const fetchData = async () => {
+        const { user } = await API.checkAuth();
+        setCurrentUser(user);
+
+        const data = await API.logRead();
+        setLogData(data);
+    };
 
 
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+
+    console.log(logData);
 
     return (
         <>
-            <Header />
+            <Header userId={currentUser.userId} />
             <main className="card mt-3">
                 <p className="container card mt-5 mb-5">
                     Log
