@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import Header from "../components/header";
-
+import LogHead from "../components/loghead";
+import LogBody from "../components/logbody";
+import SearchForm from "../components/searchform";
 
 
 // import { Link, useLocation } from "react-router-dom";
@@ -9,31 +11,31 @@ import Header from "../components/header";
 function Log() {
 
     const [currentUser, setCurrentUser] = useState({});
-    const [logData, setLogData] = useState();
 
     const fetchData = async () => {
         const { user } = await API.checkAuth();
         setCurrentUser(user);
-
-        const data = await API.logRead();
-        setLogData(data);
     };
-
 
     useEffect(() => {
         fetchData();
     }, []);
 
+    function handleSearch() {
 
-    console.log(logData);
+    }
 
     return (
         <>
             <Header userId={currentUser.userId} />
             <main className="card mt-3">
-                <p className="container card mt-5 mb-5">
-                    Log
-                </p>
+                <div className="container card mt-5 mb-5">
+                    <SearchForm handleSearch={handleSearch} />
+                    <table className="table table-striped mb-3">
+                        <LogHead />
+                        <LogBody />
+                    </table>
+                </div>
             </main>
         </>
     );
