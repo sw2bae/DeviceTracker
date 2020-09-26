@@ -8,6 +8,7 @@ import { LocationProvider } from "../utils/LocationContext";
 function Main() {
 
     const [inventory, setInventory] = useState("none");
+    const [currentUser, setCurrentUser] = useState({});
     var firstLocation;
     var secondLocation;
     const locationsArray = (Object.keys(inventory));
@@ -17,9 +18,17 @@ function Main() {
         setInventory(count);
     };
 
+    const fetchData = async () => {
+        const { user } = await API.checkAuth();
+        setCurrentUser(user);
+    };
+
     useEffect(() => {
         inventoryCount();
+        fetchData();
     }, []);
+
+
 
     async function plusBtn(e) {
         e.preventDefault();
@@ -35,7 +44,13 @@ function Main() {
                 location: location,
                 qty: parseInt(inventory[location]) + parseInt(addQty)
             });
-        }
+        };
+        API.logCreate({
+            logInId: currentUser.userId,
+            location_1: "NEW",
+            location_2: location,
+            qty: addQty
+        });
         inventoryCount();
     };
 
@@ -172,7 +187,7 @@ function Main() {
 
     return (
         <>
-            <Header />
+            <Header userId={currentUser.userId} />
             <main className="card mt-3">
                 <div className=" container">
                     <LocationProvider value={inventory}>

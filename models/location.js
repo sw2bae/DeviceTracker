@@ -12,13 +12,8 @@ module.exports = (sequelize, DataTypes) => {
                     len: [1]
                 }
             },
-            // locaiton_from: {
-            //     type: DataTypes.STRING,
-            //     allowNull: true,
-            // },
             qty: {
                 type: DataTypes.INTEGER,
-                // primaryKey: true,
                 allowNull: false,
                 validate: {
                     len: [1]

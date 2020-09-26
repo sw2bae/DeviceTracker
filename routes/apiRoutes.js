@@ -75,5 +75,16 @@ apiRoutes.delete("/locationdelete/:location", async (req, res) => {
     res.json(locationDelete);
 })
 
+apiRoutes.post("/logcreate", async (req, res) => {
+    console.log(req.body)
+    const logAdd = await db.Log.create(req.body);
+    res.json(logAdd);
+})
+
+apiRoutes.get("/logread", async (req, res) => {
+    const log = await db.Log.findAll();
+    res.send(log);
+})
 
 module.exports = apiRoutes;
+

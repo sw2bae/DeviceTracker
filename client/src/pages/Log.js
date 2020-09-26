@@ -9,22 +9,7 @@ import Header from "../components/header";
 function Log() {
 
 
-    const [currentUser, setCurrentUser] = useState({});
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const { user } = await API.checkAuth();
-            setCurrentUser(user);
-        };
-        fetchData();
-    }, []);
-
-
-    function logCreator() {
-
-
-
-    }
 
     return (
         <>

@@ -44,6 +44,16 @@ export default {
     locationDelete: async function (location) {
         const data = await axios.delete(`api/locationdelete/${location}`);
         return data;
+    },
+    logCreate: async function (userdata) {
+        const { data } = await axios.post("api/logcreate", userdata);
+        console.log(data);
+        return data;
+    },
+    logRead: async function () {
+        const data = await axios.get("api/logread");
+        console.log(data);
+        return data;
     }
 
 };
