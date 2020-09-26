@@ -9,6 +9,8 @@ function Out({ onDragStart, onDragEnd, onDragOver, onDragEnter, onDragLeave, onD
     let locations = (Object.keys(inventory));
     locations.shift();
 
+
+
     return (
         <main className="card mt-5 mb-5 col-sm" onDragOver={onDragOver} onDragEnter={onDragEnter} onDragLeave={onDragLeave} onDrop={onDragDrop} id="OutBound">
             {locations.map((location, index) => {

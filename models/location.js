@@ -26,16 +26,6 @@ module.exports = (sequelize, DataTypes) => {
             }
         }
     );
-    Location.associate = function (models) {
-        // associations can be defined here
-        Location.belongsTo(models.User, {});
 
-        // Main.hasMany(models.Question, {
-        //     onDelete: "cascade",
-        //     foreignKey: {
-        //         allowNull: false
-        //     }
-        // });
-    };
     return Location;
 };

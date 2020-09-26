@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import Header from "../components/header";
 
@@ -8,6 +8,23 @@ import Header from "../components/header";
 
 function Log() {
 
+
+    const [currentUser, setCurrentUser] = useState({});
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const { user } = await API.checkAuth();
+            setCurrentUser(user);
+        };
+        fetchData();
+    }, []);
+
+
+    function logCreator() {
+
+
+
+    }
 
     return (
         <>
