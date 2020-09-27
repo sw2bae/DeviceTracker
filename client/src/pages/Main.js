@@ -17,12 +17,10 @@ function Main() {
         const count = await API.locationRead();
         setInventory(count);
     };
-
     const fetchData = async () => {
         const { user } = await API.checkAuth();
         setCurrentUser(user);
     };
-
     useEffect(() => {
         inventoryCount();
         fetchData();
@@ -66,7 +64,6 @@ function Main() {
         e.preventDefault();
         const location = e.target.value;
         const subtractQty = prompt("(-) Please Enter Qty : ");
-        console.log(location);
         if (!locationsArray.includes("Aging Room")) {
             alert("No Stock")
         } else if (parseInt(inventory[location]) - parseInt(subtractQty) < 0 || subtractQty <= 0) {
@@ -83,19 +80,16 @@ function Main() {
                 qty: subtractQty
             });
         }
-
         inventoryCount();
     };
 
 
     async function dragStart(e) {
-        console.log("Drag Start : ");
         firstLocation = e.target.id;
         e.target.className += " bg-dark text-white";
     };
     function dragEnd(e) {
         e.preventDefault();
-        console.log("Drag End : ", e.target.id);
         if (e.target.id === "OutBound") {
             e.target.className = "card mt-5 mb-5 col-sm";
         } else {
@@ -105,11 +99,9 @@ function Main() {
     };
     function dragOver(e) {
         e.preventDefault();
-        console.log("Drag Over : ");
     };
     function dragEnter(e) {
         e.preventDefault();
-        console.log("Drag Enter : ");
         if (e.target.id === "OutBound") {
             e.target.className += " bg-info text-white";
         } else {
@@ -118,7 +110,6 @@ function Main() {
     };
     function dragLeave(e) {
         e.preventDefault();
-        console.log("Drag Leave : ");
         if (e.target.id === "OutBound") {
             e.target.className = "card mt-5 mb-5 col-sm";
         } else {
@@ -129,10 +120,7 @@ function Main() {
     async function dragDrop(e) {
         e.preventDefault();
         e.stopPropagation()
-        console.log("Drag Drop : ", e.target.id);
         secondLocation = e.target.id;
-        console.log(firstLocation, secondLocation);
-
         if (secondLocation === "OutBound") {
             const newLocation = prompt("Location : ")
             const addQty = prompt("QTY : ");
