@@ -47,7 +47,7 @@ export default {
     },
     logCreate: async function (userdata) {
         const { data } = await axios.post("api/logcreate", userdata);
-        console.log(data);
+        // console.log(data);
         return data;
     },
     logRead: async function () {

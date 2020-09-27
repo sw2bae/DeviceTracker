@@ -19,7 +19,7 @@ function Out({ onDragStart, onDragEnd, onDragOver, onDragEnter, onDragLeave, onD
                     if (typeof (inventory) === "string") {
                         return;
                     } else {
-                        return (<ul className="font-weight-bold text-center mt-1 mb-1 border rounded" draggable="true" id={location} onDragStart={onDragStart} onDragEnd={onDragEnd} onDragOver={onDragOver} onDragEnter={onDragEnter} onDragLeave={onDragLeave} onDrop={onDragDrop} key={index}>[{location}] {inventory[location]}</ul>);
+                        return (<p className="font-weight-bold text-center mt-1 mb-1 border rounded" draggable="true" id={location} onDragStart={onDragStart} onDragEnd={onDragEnd} onDragOver={onDragOver} onDragEnter={onDragEnter} onDragLeave={onDragLeave} onDrop={onDragDrop} key={index}>[{location}] {inventory[location]}</p>);
                     }
                 })}
                 <div className="mb-3" />

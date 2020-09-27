@@ -39,6 +39,12 @@ function Main() {
                 location: location,
                 qty: addQty
             });
+            API.logCreate({
+                logInId: currentUser.userId,
+                location_1: "+",
+                location_2: location,
+                qty: addQty
+            });
         } else if (addQty <= 0) {
             alert("QTY Input Error");
         } else {
@@ -140,7 +146,7 @@ function Main() {
                 alert("Location Input Error");
             } else if (parseInt(inventory[firstLocation]) - parseInt(addQty) < 0 || addQty <= 0) {
                 alert("QTY Input Error");
-            } else if (parseInt(inventory[firstLocation]) - parseInt(addQty) == 0 && firstLocation != "Aging Room") {
+            } else if (parseInt(inventory[firstLocation]) - parseInt(addQty) === 0 && firstLocation !== "Aging Room") {
                 await API.locationAdd({
                     location: newLocation,
                     qty: addQty
@@ -183,7 +189,7 @@ function Main() {
 
             if (parseInt(inventory[firstLocation]) - parseInt(moveQty) < 0 || moveQty <= 0) {
                 alert("QTY Input Error");
-            } else if (parseInt(inventory[firstLocation]) - parseInt(moveQty) == 0) {
+            } else if (parseInt(inventory[firstLocation]) - parseInt(moveQty) === 0) {
                 await API.locationUpdate({
                     location: secondLocation,
                     qty: parseInt(inventory[secondLocation]) + parseInt(moveQty)

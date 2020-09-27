@@ -7,6 +7,7 @@ function LogHead() {
         <thead>
             <tr>
                 <th scope="col">Log #</th>
+                <th scope="col">Date</th>
                 <th scope="col">Time</th>
                 <th scope="col">User ID</th>
                 <th scope="col">Location From</th>

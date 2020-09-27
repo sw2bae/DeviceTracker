@@ -4,6 +4,16 @@ module.exports = (sequelize, DataTypes) => {
     const Log = sequelize.define(
         'Log',
         {
+            date: {
+                type: DataTypes.DATEONLY,
+                allowNull: false,
+                defaultValue: DataTypes.NOW
+            },
+            time: {
+                type: DataTypes.TIME,
+                allowNull: false,
+                defaultValue: DataTypes.NOW
+            },
             logInId: {
                 type: DataTypes.STRING,
                 allowNull: false,
