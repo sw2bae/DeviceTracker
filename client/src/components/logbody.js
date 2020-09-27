@@ -22,6 +22,7 @@ function LogBody() {
     return (
         <tbody>
             {logData.reverse().map((log, index) => {
+                var timestamp = new Date(log.updatedAt);
                 return (
                     <tr key={index}>
                         <td>{log.createdAt.substring(0, 10)}</td>
