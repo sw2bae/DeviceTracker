@@ -136,9 +136,8 @@ function Main() {
                 alert("Duplicated Location Input");
             } else if (inventory[firstLocation] == null) {
                 alert("No Stock");
-                // } else if (Number(newLocation) != NaN) {
-                //     console.log(Number(newLocation));
-                //     alert("Location Input Error");
+            } else if (!isNaN(Number(newLocation))) {
+                alert("Location Input Error");
             } else if (parseInt(inventory[firstLocation]) - parseInt(addQty) < 0 || addQty <= 0) {
                 alert("QTY Input Error");
             } else if (parseInt(inventory[firstLocation]) - parseInt(addQty) == 0 && firstLocation != "Aging Room") {

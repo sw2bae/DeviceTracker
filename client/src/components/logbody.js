@@ -25,8 +25,8 @@ function LogBody() {
                 var timestamp = new Date(log.updatedAt);
                 return (
                     <tr key={index}>
-                        <td>{log.createdAt.substring(0, 10)}</td>
                         <td>{log.id}</td>
+                        <td>{log.createdAt.substring(0, 10)}</td>
                         <td>{log.logInId}</td>
                         <td>{log.location_1}</td>
                         <td>{log.location_2}</td>
