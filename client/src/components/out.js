@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useLocationContext } from "../utils/LocationContext";
-import API from "../utils/API";
+
 
 function Out({ onDragStart, onDragEnd, onDragOver, onDragEnter, onDragLeave, onDragDrop, dailyLogData }) {
 
