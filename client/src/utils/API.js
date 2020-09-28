@@ -53,6 +53,10 @@ export default {
     logRead: async function () {
         const { data } = await axios.get("api/logread");
         return data;
+    },
+    dailyLog: async function () {
+        const { data } = await axios.get("api/dailyLog");
+        return data;
     }
 
 };

@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLocationContext } from "../utils/LocationContext";
+import API from "../utils/API";
 
-function Out({ onDragStart, onDragEnd, onDragOver, onDragEnter, onDragLeave, onDragDrop }) {
+function Out({ onDragStart, onDragEnd, onDragOver, onDragEnter, onDragLeave, onDragDrop, dailyLogData }) {
+
 
     const inventory = useLocationContext();
-    // console.log(inventory);
 
     let locations = (Object.keys(inventory));
     locations.shift();
 
+    let count = (Object.values(inventory));
+    let sum = count.reduce((pre, value) => {
+        return pre + value;
+    })
 
 
     return (
@@ -27,6 +32,33 @@ function Out({ onDragStart, onDragEnd, onDragOver, onDragEnter, onDragLeave, onD
             <div className="mr-3">
             </div>
             <div className="card mt-5 mb-5 col-sm">
+                <div className="mt-3" />
+                <h1 className="font-weight-bold text-center mt-1 mb-1 border rounded"> Total : {sum}</h1>
+                <div className="mb-3" />
+                <table className="table table-striped mb-3">
+
+                    <thead>
+                        <tr className="align-middle text-center">
+                            <th scope="col" >ID</th>
+                            <th scope="col" >From</th>
+                            <th scope="col" >To</th>
+                            <th scope="col" >QTY</th>
+                        </tr>
+                    </thead>
+                    <tbody className="text-center">
+                        {dailyLogData.map((log, index) => {
+                            return (
+                                <tr key={index}>
+                                    <td>{log.logInId}</td>
+                                    <td>{log.location_1}</td>
+                                    <td>{log.location_2}</td>
+                                    <td>{log.qty}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+
+                </table>
             </div>
         </>
     )

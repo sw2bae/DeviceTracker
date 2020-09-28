@@ -9,6 +9,8 @@ function Main() {
 
     const [inventory, setInventory] = useState("none");
     const [currentUser, setCurrentUser] = useState({});
+    const [dailyLogData, setDailyLogData] = useState([{}]);
+
     var firstLocation;
     var secondLocation;
     const locationsArray = (Object.keys(inventory));
@@ -17,6 +19,13 @@ function Main() {
         const count = await API.locationRead();
         setInventory(count);
     };
+
+    const dailyLogRead = async () => {
+        const data = await API.dailyLog();
+        const recentData = data.reverse();
+        setDailyLogData(recentData);
+    };
+
     const fetchData = async () => {
         const { user } = await API.checkAuth();
         setCurrentUser(user);
@@ -24,6 +33,7 @@ function Main() {
     useEffect(() => {
         inventoryCount();
         fetchData();
+        dailyLogRead();
     }, []);
 
 
@@ -58,6 +68,7 @@ function Main() {
             });
         };
         inventoryCount();
+        dailyLogRead();
     };
 
     async function minusBtn(e) {
@@ -81,6 +92,7 @@ function Main() {
             });
         }
         inventoryCount();
+        dailyLogRead();
     };
 
 
@@ -96,6 +108,7 @@ function Main() {
             e.target.className = "font-weight-bold text-center mt-1 mb-1 border rounded";
         }
         inventoryCount();
+        dailyLogRead();
     };
     function dragOver(e) {
         e.preventDefault();
@@ -165,10 +178,12 @@ function Main() {
                 });
             }
             inventoryCount();
+            dailyLogRead();
         }
         else if (firstLocation === secondLocation) {
             e.target.className = "font-weight-bold text-center mt-1 mb-1 border rounded";
             inventoryCount();
+            dailyLogRead();
             return;
         }
         else {
@@ -223,8 +238,10 @@ function Main() {
                 });
             };
             inventoryCount();
+            dailyLogRead();
         }
         inventoryCount();
+        dailyLogRead();
     };
 
     return (
@@ -237,7 +254,7 @@ function Main() {
                             <In onDragStart={dragStart} onDragEnd={dragEnd} onDragOver={dragOver} onDragEnter={dragEnter} onDragLeave={dragLeave} onDragDrop={dragDrop} plusBtn={plusBtn} minusBtn={minusBtn} />
                             <div className="mr-3">
                             </div>
-                            <Out onDragStart={dragStart} onDragEnd={dragEnd} onDragOver={dragOver} onDragEnter={dragEnter} onDragLeave={dragLeave} onDragDrop={dragDrop} />
+                            <Out onDragStart={dragStart} onDragEnd={dragEnd} onDragOver={dragOver} onDragEnter={dragEnter} onDragLeave={dragLeave} onDragDrop={dragDrop} dailyLogData={dailyLogData} />
                         </div>
                     </ LocationProvider>
                 </div>

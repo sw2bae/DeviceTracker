@@ -86,5 +86,38 @@ apiRoutes.get("/logread", async (req, res) => {
     res.send(log);
 })
 
+apiRoutes.get("/dailyLog", async (req, res) => {
+    function leadingZeros(n, digits) {
+        var zero = '';
+        n = n.toString();
+        if (n.length < digits) {
+            for (let i = 0; i < digits - n.length; i++)
+                zero += '0';
+        }
+        return zero + n;
+    }
+    function getTimeStamp() {
+        var d = new Date();
+        var s =
+            leadingZeros(d.getFullYear(), 4) + '-' +
+            leadingZeros(d.getMonth() + 1, 2) + '-' +
+            leadingZeros(d.getDate(), 2);
+        return s;
+    }
+    var today = getTimeStamp();
+    const dailyLogRead = await db.Log.findAll({
+        attributes: [
+            'logInId',
+            'location_1',
+            'location_2',
+            'qty'
+        ],
+        where: {
+            date: today
+        }
+    });
+    res.send(dailyLogRead);
+})
+
 module.exports = apiRoutes;
 
