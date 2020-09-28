@@ -15,7 +15,8 @@ function Log() {
 
     const [btnStatus, setBtnStatus] = useState({
         nummode: "⬇",
-        charmode: "⬇"
+        charmode1: "⬇",
+        charmode2: "⬇"
     }
     );
 

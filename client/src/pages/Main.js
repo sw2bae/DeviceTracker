@@ -178,18 +178,33 @@ function Main() {
             if (parseInt(inventory[firstLocation]) - parseInt(moveQty) < 0 || moveQty <= 0) {
                 alert("QTY Input Error");
             } else if (parseInt(inventory[firstLocation]) - parseInt(moveQty) === 0) {
-                await API.locationUpdate({
-                    location: secondLocation,
-                    qty: parseInt(inventory[secondLocation]) + parseInt(moveQty)
-                }).then(() => {
-                    API.locationDelete(firstLocation);
-                    API.logCreate({
-                        logInId: currentUser.userId,
-                        location_1: firstLocation,
-                        location_2: secondLocation,
-                        qty: moveQty
-                    });
-                })
+
+                if (parseInt(inventory["Aging Room"]) - parseInt(moveQty) === 0) {
+                    await API.locationUpdate({
+                        location: secondLocation,
+                        qty: parseInt(inventory[secondLocation]) + parseInt(moveQty)
+                    }).then(() => {
+                        API.logCreate({
+                            logInId: currentUser.userId,
+                            location_1: firstLocation,
+                            location_2: secondLocation,
+                            qty: moveQty
+                        });
+                    })
+                } else {
+                    await API.locationUpdate({
+                        location: secondLocation,
+                        qty: parseInt(inventory[secondLocation]) + parseInt(moveQty)
+                    }).then(() => {
+                        API.locationDelete(firstLocation);
+                        API.logCreate({
+                            logInId: currentUser.userId,
+                            location_1: firstLocation,
+                            location_2: secondLocation,
+                            qty: moveQty
+                        });
+                    })
+                };
             } else {
                 await API.locationUpdate({
                     location: secondLocation,
