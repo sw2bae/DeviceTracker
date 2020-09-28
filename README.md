@@ -1,29 +1,36 @@
-# Create React Express App
 
-## About This Boilerplate
+# __MQL-KS Device Tracker__
+![GitHub followers](https://img.shields.io/github/followers/sw2bae?style=for-the-badge)
+* NDA Project Device Tracker
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
-
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
-
-## Starting the app locally
-
-Start by installing front and backend dependencies. While in this directory, run the following command:
-
+## __Table of Contents__  
+* [Installation](#installation)               
+* [Usage](#usage)                    
+* [License](#license)                      
+* [Contributor](#contributor)                 
+* [Test](#test)
+* [Question](#question) 
+## __Installation__ :               
+* react
+```  
+npm i
 ```
-npm install
+## __Usage__ :                   
+* internal NDA device tracking tool
+## __License__ :                    
+* MIT
+## __Contributor__ :              
+* self-project
+## __Test__ :                      
+* no test code
+```  
+npm run test
 ```
+# __Question__ :
+<img width="150" src="https://avatars0.githubusercontent.com/u/60491242?v=4">
 
-This should install node modules within the server and the client folder.
-
-After both installations complete, run the following command in your terminal:
-
-```
-npm start
-```
-
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
-
-## Deployment (Heroku)
-
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
+* #### Name                     : Sang Bae
+* #### GitHub ID                : sw2bae
+* #### GitHub URL               : https://github.com/sw2bae
+* #### Website                  : https://www.linkedin.com/in/sang-bae-8a38011a0/
+* #### Email Address            : null
