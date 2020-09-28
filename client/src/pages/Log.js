@@ -15,8 +15,8 @@ function Log() {
 
     const [btnStatus, setBtnStatus] = useState({
         nummode: "⬇",
-        charmode1: "⬇",
-        charmode2: "⬇"
+        location1: "⬇",
+        location2: "⬇"
     }
     );
 
@@ -54,7 +54,6 @@ function Log() {
     }
 
     function sortByNum() {
-        console.log(btnStatus.nummode);
         if (btnStatus.nummode === "⬇") {
             setBtnStatus({ ...btnStatus, nummode: "⬆" });
             let byNum = function (a, b) {
@@ -90,13 +89,13 @@ function Log() {
         };
     };
 
-
-    function sortByCharLocation1(e) {
-        if (btnStatus.charmode1 === "⬇") {
-            setBtnStatus({ ...btnStatus, charmode1: "⬆" });
+    function sortByCharLocation(e) {
+        const { id } = e.target;
+        if (btnStatus[id] === "⬇") {
+            setBtnStatus({ ...btnStatus, [id]: "⬆" });
             let byName = function (a, b) {
-                var logA = a.location1.replace(/ /gi, "").toUpperCase();
-                var logB = b.location1.replace(/ /gi, "").toUpperCase();
+                var logA = a[id].replace(/ /gi, "").toUpperCase();
+                var logB = b[id].replace(/ /gi, "").toUpperCase();
                 if (logA < logB) {
                     return -1;
                 }
@@ -105,14 +104,14 @@ function Log() {
                 }
                 return 0;
             }
-            const filteredLogCopy_2 = [...filteredLog];
-            let sortedbyLocation = filteredLogCopy_2.sort(byName);
+            const filteredLogCopy = [...filteredLog];
+            let sortedbyLocation = filteredLogCopy.sort(byName);
             setFilteredLog(sortedbyLocation);
         } else {
-            setBtnStatus({ ...btnStatus, charmode1: "⬇" });
+            setBtnStatus({ ...btnStatus, [id]: "⬇" });
             let byName = function (a, b) {
-                var logA = a.location1.replace(/ /gi, "").toUpperCase();
-                var logB = b.location1.replace(/ /gi, "").toUpperCase();
+                var logA = a[id].replace(/ /gi, "").toUpperCase();
+                var logB = b[id].replace(/ /gi, "").toUpperCase();
                 if (logA > logB) {
                     return -1;
                 }
@@ -121,43 +120,8 @@ function Log() {
                 }
                 return 0;
             }
-            const filteredLogCopy_3 = [...filteredLog];
-            let sortedbyLocation = filteredLogCopy_3.sort(byName);
-            setFilteredLog(sortedbyLocation);
-        };
-    };
-    function sortByCharLocation2(e) {
-        if (btnStatus.charmode2 === "⬇") {
-            setBtnStatus({ ...btnStatus, charmode2: "⬆" });
-            let byName = function (a, b) {
-                var logA = a.location2.replace(/ /gi, "").toUpperCase();
-                var logB = b.location2.replace(/ /gi, "").toUpperCase();
-                if (logA < logB) {
-                    return -1;
-                }
-                if (logA > logB) {
-                    return 1;
-                }
-                return 0;
-            }
-            const filteredLogCopy_4 = [...filteredLog];
-            let sortedbyLocation = filteredLogCopy_4.sort(byName);
-            setFilteredLog(sortedbyLocation);
-        } else {
-            setBtnStatus({ ...btnStatus, charmode2: "⬇" });
-            let byName = function (a, b) {
-                var logA = a.location2.replace(/ /gi, "").toUpperCase();
-                var logB = b.location2.replace(/ /gi, "").toUpperCase();
-                if (logA > logB) {
-                    return -1;
-                }
-                if (logA < logB) {
-                    return 1;
-                }
-                return 0;
-            }
-            const filteredLogCopy_5 = [...filteredLog];
-            let sortedbyLocation = filteredLogCopy_5.sort(byName);
+            const filteredLogCopy = [...filteredLog];
+            let sortedbyLocation = filteredLogCopy.sort(byName);
             setFilteredLog(sortedbyLocation);
         }
     }
@@ -171,7 +135,7 @@ function Log() {
                 <div className="container card mt-5 mb-5">
                     <SearchForm handleSearch={handleSearch} />
                     <table className="table table-striped mb-3">
-                        <LogHead btnStatus={btnStatus} sortByNum={sortByNum} sortByCharLocation1={sortByCharLocation1} sortByCharLocation2={sortByCharLocation2} />
+                        <LogHead btnStatus={btnStatus} sortByNum={sortByNum} sortByCharLocation={sortByCharLocation} />
                         <LogBody logData={filteredLog} />
                     </table>
                 </div>
