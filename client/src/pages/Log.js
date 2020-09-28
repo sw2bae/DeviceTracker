@@ -10,10 +10,8 @@ import SearchForm from "../components/searchform";
 
 function Log() {
 
-    const [currentUser, setCurrentUser] = useState({});
-
-    const [logData, setLogData] = useState([]);
-    const [filteredLog, setFilteredLog] = useState([]);
+    const [logData, setLogData] = useState([{}]);
+    const [filteredLog, setFilteredLog] = useState([{}]);
 
     const [btnStatus, setBtnStatus] = useState({
         nummode: "⬇",
@@ -21,14 +19,9 @@ function Log() {
     }
     );
 
-
     const fetchData = async () => {
-        const { user } = await API.checkAuth();
-        setCurrentUser(user);
-
         let logs = [];
         const data = await API.logRead();
-
         for (let i = 0; i < data.length; i++) {
             let log = {
                 id: data[i].id,
@@ -42,54 +35,33 @@ function Log() {
             logs.push(log);
         };
         setLogData(logs);
-        setFilteredLog(logs);
+        setFilteredLog(logs.reverse());
     };
 
     useEffect(() => {
         fetchData();
     }, []);
 
-    function handleSearch() {
-
+    function handleSearch(e) {
+        const { value } = e.target;
+        let searchByUserId = logData.filter(logdata =>
+            new RegExp(value, "i").test(logdata.userId)
+        );
+        console.log(searchByUserId);
+        setFilteredLog(searchByUserId);
+        console.log(filteredLog);
     }
-
 
     function sortByNum() {
         console.log(btnStatus.nummode);
         if (btnStatus.nummode === "⬇") {
             setBtnStatus({ ...btnStatus, nummode: "⬆" });
-            let byNum = function (a, b) {
-                var numA = a.id;
-                var numB = b.id;
-                if (numA < numB) {
-                    return -1;
-                }
-                if (numA > numB) {
-                    return 1;
-                }
-                return 0;
-            }
-            const setFilteredLog_0 = [...filteredLog];
-            let sortedbyNum = setFilteredLog_0.sort(byNum);
-            setFilteredLog(sortedbyNum);
+            setFilteredLog(filteredLog.reverse());
         } else {
             setBtnStatus({ ...btnStatus, nummode: "⬇" });
-            let byNum = function (a, b) {
-                var numA = a.id;
-                var numB = b.id;
-                if (numA > numB) {
-                    return -1;
-                }
-                if (numA < numB) {
-                    return 1;
-                }
-                return 0;
-            }
-            const setFilteredLog_1 = [...filteredLog];
-            let sortedbyNum = setFilteredLog_1.sort(byNum);
-            setFilteredLog(sortedbyNum);
-        }
-    }
+            setFilteredLog(filteredLog.reverse());
+        };
+    };
 
     // function sortByChar(e) {
     //     if (btnStatus.charmode === "⬇") {
@@ -129,13 +101,13 @@ function Log() {
 
     return (
         <>
-            <Header userId={currentUser.userId} />
+            <Header />
             <main className="card mt-3">
                 <div className="container card mt-5 mb-5">
                     <SearchForm handleSearch={handleSearch} />
                     <table className="table table-striped mb-3">
                         <LogHead btnStatus={btnStatus} sortByNum={sortByNum} />
-                        <LogBody logData={logData} />
+                        <LogBody logData={filteredLog} />
                     </table>
                 </div>
             </main>

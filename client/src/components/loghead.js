@@ -13,10 +13,10 @@ function LogHead({ btnStatus, sortByNum }) {
                 <th scope="col" className="align-middle">Time</th>
                 <th scope="col" className="align-middle">User ID</th>
                 <th scope="col">Location From
-    <button type="button" className="btn btn-link">{btnStatus.charmode}</button>
+    <button type="button" className="btn btn-link" id="locatoin1">{btnStatus.charmode}</button>
                 </th>
                 <th scope="col">Location To
-    <button type="button" className="btn btn-link">{btnStatus.charmode}</button>
+    <button type="button" className="btn btn-link" id="location2">{btnStatus.charmode}</button>
                 </th>
                 <th scope="col" className="align-middle">QTY</th>
             </tr>

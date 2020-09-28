@@ -5,11 +5,11 @@ function SearchForm({ handleSearch }) {
 
         <div className="form-group container col-4 mt-3">
             <input
-                onChange={{ handleSearch }}
+                onChange={handleSearch}
                 name="term"
                 type="text"
                 className="form-control"
-                placeholder="Search"
+                placeholder="Search by User ID"
             />
         </div>
 

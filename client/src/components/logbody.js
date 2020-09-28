@@ -7,7 +7,7 @@ function LogBody({ logData }) {
 
     return (
         <tbody>
-            {logData.reverse().map((log, index) => {
+            {logData.map((log, index) => {
                 return (
                     <tr key={index}>
                         <td>{log.id}</td>
