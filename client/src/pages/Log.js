@@ -57,48 +57,112 @@ function Log() {
         console.log(btnStatus.nummode);
         if (btnStatus.nummode === "⬇") {
             setBtnStatus({ ...btnStatus, nummode: "⬆" });
-            setFilteredLog(filteredLog.reverse());
+            let byNum = function (a, b) {
+                var logA = a.id;
+                var logB = b.id;
+                if (logA < logB) {
+                    return -1;
+                }
+                if (logA > logB) {
+                    return 1;
+                }
+                return 0;
+            }
+            const filteredLogCopy_0 = [...filteredLog];
+            let sortedbyNum = filteredLogCopy_0.sort(byNum);
+            setFilteredLog(sortedbyNum);
         } else {
             setBtnStatus({ ...btnStatus, nummode: "⬇" });
-            setFilteredLog(filteredLog.reverse());
+            let byNum = function (a, b) {
+                var logA = a.id;
+                var logB = b.id;
+                if (logA > logB) {
+                    return -1;
+                }
+                if (logA < logB) {
+                    return 1;
+                }
+                return 0;
+            }
+            const filteredLogCopy_1 = [...filteredLog];
+            let sortedbyNum = filteredLogCopy_1.sort(byNum);
+            setFilteredLog(sortedbyNum);
         };
     };
 
-    // function sortByChar(e) {
-    //     if (btnStatus.charmode === "⬇") {
-    //         setBtnStatus({ ...btnStatus, charmode: "⬆" });
-    //         let byName = function (a, b) {
-    //             var nameA = a.name.replace(/ /gi, "").toUpperCase();
-    //             var nameB = b.name.replace(/ /gi, "").toUpperCase();
-    //             if (nameA < nameB) {
-    //                 return -1;
-    //             }
-    //             if (nameA > nameB) {
-    //                 return 1;
-    //             }
-    //             return 0;
-    //         }
-    //         const filteredUsersCopy0 = [...filteredUsers];
-    //         let sortedbyName = filteredUsersCopy0.sort(byName);
-    //         setFilteredUsers(sortedbyName);
-    //     } else {
-    //         setBtnStatus({ ...btnStatus, charmode: "⬇" });
-    //         let byName = function (a, b) {
-    //             var nameA = a.name.replace(/ /gi, "").toUpperCase();
-    //             var nameB = b.name.replace(/ /gi, "").toUpperCase();
-    //             if (nameA > nameB) {
-    //                 return -1;
-    //             }
-    //             if (nameA < nameB) {
-    //                 return 1;
-    //             }
-    //             return 0;
-    //         }
-    //         const filteredUsersCopy1 = [...filteredUsers];
-    //         let sortedbyName = filteredUsersCopy1.sort(byName);
-    //         setFilteredUsers(sortedbyName);
-    //     }
-    // }
+
+    function sortByCharLocation1(e) {
+        if (btnStatus.charmode1 === "⬇") {
+            setBtnStatus({ ...btnStatus, charmode1: "⬆" });
+            let byName = function (a, b) {
+                var logA = a.location1.replace(/ /gi, "").toUpperCase();
+                var logB = b.location1.replace(/ /gi, "").toUpperCase();
+                if (logA < logB) {
+                    return -1;
+                }
+                if (logA > logB) {
+                    return 1;
+                }
+                return 0;
+            }
+            const filteredLogCopy_2 = [...filteredLog];
+            let sortedbyLocation = filteredLogCopy_2.sort(byName);
+            setFilteredLog(sortedbyLocation);
+        } else {
+            setBtnStatus({ ...btnStatus, charmode1: "⬇" });
+            let byName = function (a, b) {
+                var logA = a.location1.replace(/ /gi, "").toUpperCase();
+                var logB = b.location1.replace(/ /gi, "").toUpperCase();
+                if (logA > logB) {
+                    return -1;
+                }
+                if (logA < logB) {
+                    return 1;
+                }
+                return 0;
+            }
+            const filteredLogCopy_3 = [...filteredLog];
+            let sortedbyLocation = filteredLogCopy_3.sort(byName);
+            setFilteredLog(sortedbyLocation);
+        };
+    };
+    function sortByCharLocation2(e) {
+        if (btnStatus.charmode2 === "⬇") {
+            setBtnStatus({ ...btnStatus, charmode2: "⬆" });
+            let byName = function (a, b) {
+                var logA = a.location2.replace(/ /gi, "").toUpperCase();
+                var logB = b.location2.replace(/ /gi, "").toUpperCase();
+                if (logA < logB) {
+                    return -1;
+                }
+                if (logA > logB) {
+                    return 1;
+                }
+                return 0;
+            }
+            const filteredLogCopy_4 = [...filteredLog];
+            let sortedbyLocation = filteredLogCopy_4.sort(byName);
+            setFilteredLog(sortedbyLocation);
+        } else {
+            setBtnStatus({ ...btnStatus, charmode2: "⬇" });
+            let byName = function (a, b) {
+                var logA = a.location2.replace(/ /gi, "").toUpperCase();
+                var logB = b.location2.replace(/ /gi, "").toUpperCase();
+                if (logA > logB) {
+                    return -1;
+                }
+                if (logA < logB) {
+                    return 1;
+                }
+                return 0;
+            }
+            const filteredLogCopy_5 = [...filteredLog];
+            let sortedbyLocation = filteredLogCopy_5.sort(byName);
+            setFilteredLog(sortedbyLocation);
+        }
+    }
+
+
 
     return (
         <>
@@ -107,7 +171,7 @@ function Log() {
                 <div className="container card mt-5 mb-5">
                     <SearchForm handleSearch={handleSearch} />
                     <table className="table table-striped mb-3">
-                        <LogHead btnStatus={btnStatus} sortByNum={sortByNum} />
+                        <LogHead btnStatus={btnStatus} sortByNum={sortByNum} sortByCharLocation1={sortByCharLocation1} sortByCharLocation2={sortByCharLocation2} />
                         <LogBody logData={filteredLog} />
                     </table>
                 </div>
