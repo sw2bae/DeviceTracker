@@ -31,7 +31,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={LogIn} />
-          <Route path="/signup/" component={SignUp} />
+          <Route path="/signup/onlysangbaecansignup" component={SignUp} />
           <ProtectedRoute exact={true} path="/main/" component={Main} isAuthenticated={this.state.isAuthenticated} />
           <ProtectedRoute exact={true} path="/log/" component={Log} isAuthenticated={this.state.isAuthenticated} />
         </Switch>

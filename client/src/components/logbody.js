@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import API from "../utils/API";
+import React from "react";
 // import { useUserContext } from "../../utils/userContext";
 
 // Depending on the current path, this component sets the "active" class on the appropriate navigation link item
