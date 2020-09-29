@@ -38,12 +38,6 @@ apiRoutes.get("/checkAuthentication", isAuthenticated, (req, res) => {
         user: user,
     });
 });
-
-apiRoutes.post("/locationadd", async (req, res) => {
-    const locationAdd = await db.Location.create(req.body);
-    res.json(locationAdd);
-})
-
 apiRoutes.get("/locationread", async (req, res) => {
     const count = await db.Location.findAll({
         attributes: [
@@ -53,6 +47,12 @@ apiRoutes.get("/locationread", async (req, res) => {
     });
     res.send(count);
 });
+
+apiRoutes.post("/locationadd", async (req, res) => {
+    const locationAdd = await db.Location.create(req.body);
+    res.json(locationAdd);
+})
+
 
 apiRoutes.put("/locationupdate", async (req, res) => {
     const countUpdate = await db.Location.update(req.body, {
@@ -66,7 +66,7 @@ apiRoutes.put("/locationupdate", async (req, res) => {
 })
 
 apiRoutes.delete("/locationdelete/:location", async (req, res) => {
-    console.log("DELETE LOG : ", req.params.location);
+    // console.log("DELETE LOG : ", req.params.location);
     const locationDelete = await db.Location.destroy({
         where: {
             location: req.params.location
@@ -76,7 +76,7 @@ apiRoutes.delete("/locationdelete/:location", async (req, res) => {
 })
 
 apiRoutes.post("/logcreate", async (req, res) => {
-    console.log(req.body)
+    // console.log(req.body);
     const logAdd = await db.Log.create(req.body);
     res.json(logAdd);
 })
