@@ -40,6 +40,7 @@ function Main() {
 
     async function plusBtn(e) {
         e.preventDefault();
+        inventoryCount();
         const location = e.target.value;
         const addQty = prompt("(+) Please Enter Qty : ");
         if (inventory === "none") {
@@ -73,6 +74,7 @@ function Main() {
 
     async function minusBtn(e) {
         e.preventDefault();
+        inventoryCount();
         const location = e.target.value;
         const subtractQty = prompt("(-) Please Enter Qty : ");
         if (!locationsArray.includes("Aging Room")) {
@@ -133,6 +135,7 @@ function Main() {
     async function dragDrop(e) {
         e.preventDefault();
         e.stopPropagation()
+        inventoryCount();
         secondLocation = e.target.id;
         if (secondLocation === "OutBound") {
             const newLocation = prompt("Location : ")
