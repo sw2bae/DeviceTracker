@@ -15,8 +15,8 @@ function Main() {
     var secondLocation;
     const locationsArray = (Object.keys(inventory));
 
-    const inventoryCount = async () => {
-        const count = await API.locationRead();
+    const inventoryCount = () => {
+        const count = API.locationRead();
         setInventory(count);
     };
 
@@ -58,6 +58,7 @@ function Main() {
             alert("QTY Input Error");
         } else {
             await inventoryCount().then(() => {
+
                 API.locationUpdate({
                     location: location,
                     qty: parseInt(inventory[location]) + parseInt(addQty)
