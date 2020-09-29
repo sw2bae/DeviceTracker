@@ -57,19 +57,16 @@ function Main() {
         } else if (addQty <= 0) {
             alert("QTY Input Error");
         } else {
-            await inventoryCount().then(() => {
-                API.locationUpdate({
-                    location: location,
-                    qty: parseInt(inventory[location]) + parseInt(addQty)
-                });
-                API.logCreate({
-                    logInId: currentUser.userId,
-                    location_1: "+",
-                    location_2: location,
-                    qty: addQty
-                });
-            })
-
+            await API.locationUpdate({
+                location: location,
+                qty: parseInt(inventory[location]) + parseInt(addQty)
+            });
+            API.logCreate({
+                logInId: currentUser.userId,
+                location_1: "+",
+                location_2: location,
+                qty: addQty
+            });
         };
         inventoryCount();
         dailyLogRead();
