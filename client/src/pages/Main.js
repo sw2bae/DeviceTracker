@@ -40,7 +40,7 @@ function Main() {
 
     async function plusBtn(e) {
         e.preventDefault();
-        inventoryCount();
+
         const location = e.target.value;
         const addQty = prompt("(+) Please Enter Qty : ");
         if (inventory === "none") {
@@ -57,16 +57,19 @@ function Main() {
         } else if (addQty <= 0) {
             alert("QTY Input Error");
         } else {
-            await API.locationUpdate({
-                location: location,
-                qty: parseInt(inventory[location]) + parseInt(addQty)
-            });
-            API.logCreate({
-                logInId: currentUser.userId,
-                location_1: "+",
-                location_2: location,
-                qty: addQty
-            });
+            await inventoryCount().then(() => {
+                API.locationUpdate({
+                    location: location,
+                    qty: parseInt(inventory[location]) + parseInt(addQty)
+                });
+                API.logCreate({
+                    logInId: currentUser.userId,
+                    location_1: "+",
+                    location_2: location,
+                    qty: addQty
+                });
+            })
+
         };
         inventoryCount();
         dailyLogRead();
@@ -74,7 +77,7 @@ function Main() {
 
     async function minusBtn(e) {
         e.preventDefault();
-        inventoryCount();
+
         const location = e.target.value;
         const subtractQty = prompt("(-) Please Enter Qty : ");
         if (!locationsArray.includes("Aging Room")) {
@@ -135,7 +138,7 @@ function Main() {
     async function dragDrop(e) {
         e.preventDefault();
         e.stopPropagation()
-        inventoryCount();
+
         secondLocation = e.target.id;
         if (secondLocation === "OutBound") {
             const newLocation = prompt("Location : ")
