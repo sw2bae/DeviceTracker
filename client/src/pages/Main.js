@@ -196,22 +196,6 @@ function Main() {
                 alert("QTY Input Error");
             } else if (count[firstLocation] == undefined || count[firstLocation] === 0) {
                 alert("No Stock");
-            } else if (count[secondLocation] == undefined) {
-                await API.locationAdd({
-                    location: secondLocation,
-                    qty: moveQty
-                }).then(() => {
-                    API.locationUpdate({
-                        location: firstLocation,
-                        qty: parseInt(count[firstLocation]) - parseInt(moveQty)
-                    });
-                    API.logCreate({
-                        logInId: currentUser.userId,
-                        location_1: firstLocation,
-                        location_2: secondLocation,
-                        qty: moveQty
-                    });
-                });
 
             } else if (parseInt(count[firstLocation]) - parseInt(moveQty) === 0) {
 
@@ -230,6 +214,19 @@ function Main() {
                             location_2: secondLocation,
                             qty: moveQty
                         });
+                    })
+                } else if (count[secondLocation] == undefined) {
+                    await API.locationAdd({
+                        location: secondLocation,
+                        qty: moveQty
+                    }).then(() => {
+                        API.locationDelete(firstLocation);
+                        API.logCreate({
+                            logInId: currentUser.userId,
+                            location_1: firstLocation,
+                            location_2: secondLocation,
+                            qty: moveQty
+                        })
                     })
                 } else {
                     await API.locationUpdate({
