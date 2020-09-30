@@ -106,6 +106,7 @@ function Main() {
     async function dragStart(e) {
         firstLocation = e.target.id;
         e.target.className += " bg-dark text-white";
+        // fetchData();
     };
     function dragEnd(e) {
         e.preventDefault();
