@@ -15,17 +15,6 @@ function Main() {
     var secondLocation;
     const locationsArray = (Object.keys(inventory));
 
-    // const inventoryCount = async () => {
-    //     const count = await API.locationRead();
-    //     setInventory(count);
-    // };
-
-    // const dailyLogRead = async () => {
-    //     const data = await API.dailyLog();
-    //     const recentData = data.reverse();
-    //     setDailyLogData(recentData);
-    // };
-
     const fetchData = async () => {
         const { user } = await API.checkAuth();
         const count = await API.locationRead();
@@ -39,7 +28,6 @@ function Main() {
     useEffect(() => {
         fetchData();
     }, []);
-
 
 
     async function plusBtn(e) {
@@ -208,6 +196,23 @@ function Main() {
                 alert("QTY Input Error");
             } else if (count[firstLocation] == undefined || count[firstLocation] === 0) {
                 alert("No Stock");
+            } else if (count[secondLocation] == undefined) {
+                await API.locationAdd({
+                    location: secondLocation,
+                    qty: moveQty
+                }).then(() => {
+                    API.locationUpdate({
+                        location: firstLocation,
+                        qty: parseInt(count[firstLocation]) - parseInt(moveQty)
+                    });
+                    API.logCreate({
+                        logInId: currentUser.userId,
+                        location_1: firstLocation,
+                        location_2: secondLocation,
+                        qty: moveQty
+                    });
+                });
+
             } else if (parseInt(count[firstLocation]) - parseInt(moveQty) === 0) {
 
                 if (firstLocation === "Aging Room") {
