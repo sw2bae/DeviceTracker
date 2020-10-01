@@ -62,7 +62,6 @@ apiRoutes.put("/locationupdate", async (req, res) => {
     });
     // console.log(countUpdate);
     res.json(countUpdate);
-
 })
 
 apiRoutes.delete("/locationdelete/:location", async (req, res) => {
