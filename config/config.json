@@ -16,7 +16,6 @@
   },
   "production": {
     "use_env_variable": "JAWSDB_URL",
-    "dialect": "mysql",
-    "timezone": "-05:00"
+    "dialect": "mysql"
   }
 }
