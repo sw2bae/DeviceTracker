@@ -37,7 +37,7 @@ function LogIn() {
                 </div>
                 <button type="submit" className="btn btn-outline-info mb-5">Log In</button>
             </form>
-            <p className="text-center alert alert-danger" role="alert" style={{ display: loginUnauth }}>Email and password pair not found</p>
+            <p className="text-center alert alert-danger" role="alert" style={{ display: loginUnauth }}>ID and Password pair not found</p>
         </main>
     );
 }
