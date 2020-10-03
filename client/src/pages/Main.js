@@ -34,7 +34,6 @@ function Main() {
         e.preventDefault();
         const location = e.target.value;
         const count = await API.locationRead();
-        // console.log("COUNT==>", count[location]);
         const addQty = prompt("(+) Please Enter Qty : ");
         if (count[location] === undefined) {
             await API.locationAdd({
@@ -50,7 +49,6 @@ function Main() {
         } else if (addQty <= 0) {
             alert("QTY Input Error");
         } else {
-            // --------------
             await API.locationUpdate({
                 location: location,
                 qty: parseInt(count[location]) + parseInt(addQty)
@@ -69,7 +67,6 @@ function Main() {
         e.preventDefault();
         const location = e.target.value;
         const count = await API.locationRead();
-        // console.log("COUNT==>", count[location]);
         const subtractQty = prompt("(-) Please Enter Qty : ");
         if (count[location] === undefined || count[location] === 0) {
             alert("No Stock")
@@ -90,11 +87,9 @@ function Main() {
         fetchData();
     };
 
-
     async function dragStart(e) {
         firstLocation = e.target.id;
         e.target.className += " bg-dark text-white";
-        // fetchData();
     };
     function dragEnd(e) {
         e.preventDefault();
@@ -103,11 +98,9 @@ function Main() {
         } else {
             e.target.className = "font-weight-bold text-center mt-1 mb-1 border rounded";
         }
-        // fetchData();
     };
     function dragOver(e) {
         e.preventDefault();
-        // fetchData();
     };
     function dragEnter(e) {
         e.preventDefault();
@@ -116,7 +109,6 @@ function Main() {
         } else {
             e.target.className += " bg-dark text-white";
         }
-        // fetchData();
     };
     function dragLeave(e) {
         e.preventDefault();
@@ -126,12 +118,11 @@ function Main() {
             e.target.className = "font-weight-bold text-center mt-1 mb-1 border rounded";
         }
     };
-
     async function dragDrop(e) {
         e.preventDefault();
         e.stopPropagation()
         secondLocation = e.target.id;
-
+        // ---------------------------------------------------------------------
         if (secondLocation === "OutBound") {
             const newLocation = prompt("Location : ")
             const addQty = prompt("QTY : ");
@@ -140,27 +131,43 @@ function Main() {
             const count = await API.locationRead();
             console.log("COUNT=====>", count[firstLocation]);
             console.log("COUNT=====>", count[newLocation]);
-            if (count[newLocation] !== undefined) {
-                alert("Duplicated Location Input");
-            } else if (count[firstLocation] == undefined || count[firstLocation] === 0) {
+            if (count[firstLocation] == undefined || count[firstLocation] == 0) {
                 alert("No Stock");
-            } else if (!isNaN(Number(newLocation))) {
+            } else if (count[newLocation] !== undefined || !isNaN(Number(newLocation))) {
                 alert("Location Input Error");
-            } else if (parseInt(count[firstLocation]) - parseInt(addQty) < 0 || addQty <= 0) {
+            } else if (parseInt(count[firstLocation]) - parseInt(addQty) < 0 || isNaN(Number(addQty)) || addQty <= 0) {
                 alert("QTY Input Error");
-            } else if (parseInt(count[firstLocation]) - parseInt(addQty) === 0 && firstLocation !== "Aging Room") {
-                await API.locationAdd({
-                    location: newLocation,
-                    qty: addQty
-                }).then(() => {
-                    API.locationDelete(firstLocation);
-                    API.logCreate({
-                        logInId: currentUser.userId,
-                        location_1: firstLocation,
-                        location_2: newLocation,
+            } else if (parseInt(count[firstLocation]) - parseInt(addQty) == 0) {
+                if (firstLocation === "Aging Room") {
+                    await API.locationAdd({
+                        location: newLocation,
                         qty: addQty
-                    });
-                });
+                    }).then(() => {
+                        API.locationUpdate({
+                            location: firstLocation,
+                            qty: parseInt(count[firstLocation] - parseInt(addQty))
+                        });
+                        API.logCreate({
+                            logInId: currentUser.userId,
+                            location_1: firstLocation,
+                            location_2: newLocation,
+                            qty: addQty
+                        });
+                    })
+                } else {
+                    await API.locationAdd({
+                        location: newLocation,
+                        qty: addQty
+                    }).then(() => {
+                        API.locationDelete(firstLocation);
+                        API.logCreate({
+                            logInId: currentUser.userId,
+                            location_1: firstLocation,
+                            location_2: newLocation,
+                            qty: addQty
+                        });
+                    })
+                }
             } else {
                 await API.locationAdd({
                     location: newLocation,
@@ -168,7 +175,7 @@ function Main() {
                 }).then(() => {
                     API.locationUpdate({
                         location: firstLocation,
-                        qty: parseInt(count[firstLocation]) - parseInt(addQty)
+                        qty: parseInt(count[firstLocation] - parseInt(addQty))
                     });
                     API.logCreate({
                         logInId: currentUser.userId,
@@ -176,72 +183,42 @@ function Main() {
                         location_2: newLocation,
                         qty: addQty
                     });
-                });
+                })
             }
             fetchData();
         }
-        else if (firstLocation === secondLocation) {
+        // ----------------------------------------------------
+        else if (firstLocation == secondLocation) {
             e.target.className = "font-weight-bold text-center mt-1 mb-1 border rounded";
             fetchData();
             return;
         }
-        else {
-            const moveQty = prompt("QTY : ");
+        // ----------------------------------------------------------
+        else if (secondLocation === "Aging Room") {
             e.target.className = "font-weight-bold text-center mt-1 mb-1 border rounded";
-
             const count = await API.locationRead();
+            const moveQty = prompt("QTY : ");
+
             console.log("FIRST LOCATION===>", count[firstLocation]);
             console.log("SECOND LOCATION===>", count[secondLocation]);
-            if (parseInt(count[firstLocation]) - parseInt(moveQty) < 0 || moveQty <= 0) {
-                alert("QTY Input Error");
-            } else if (count[firstLocation] == undefined || count[firstLocation] === 0) {
+
+            if (count[firstLocation] == undefined || count[firstLocation] == 0) {
                 alert("No Stock");
-
-            } else if (parseInt(count[firstLocation]) - parseInt(moveQty) === 0) {
-
-                if (firstLocation === "Aging Room") {
-                    await API.locationUpdate({
-                        location: secondLocation,
-                        qty: parseInt(count[secondLocation]) + parseInt(moveQty)
-                    }).then(() => {
-                        API.locationUpdate({
-                            location: firstLocation,
-                            qty: parseInt(count[firstLocation]) - parseInt(moveQty)
-                        });
-                        API.logCreate({
-                            logInId: currentUser.userId,
-                            location_1: firstLocation,
-                            location_2: secondLocation,
-                            qty: moveQty
-                        });
-                    })
-                } else if (count[secondLocation] == undefined) {
-                    await API.locationAdd({
-                        location: secondLocation,
+            } else if (parseInt(count[firstLocation]) - parseInt(moveQty) < 0 || isNaN(Number(moveQty)) || moveQty <= 0) {
+                alert("QTY Input Error");
+            } else if (parseInt(count[firstLocation]) - parseInt(moveQty) == 0) {
+                await API.locationUpdate({
+                    location: secondLocation,
+                    qty: parseInt(count[secondLocation]) + parseInt(moveQty)
+                }).then(() => {
+                    API.locationDelete(firstLocation);
+                    API.logCreate({
+                        logInId: currentUser.userId,
+                        location_1: firstLocation,
+                        location_2: secondLocation,
                         qty: moveQty
-                    }).then(() => {
-                        API.locationDelete(firstLocation);
-                        API.logCreate({
-                            logInId: currentUser.userId,
-                            location_1: firstLocation,
-                            location_2: secondLocation,
-                            qty: moveQty
-                        })
-                    })
-                } else {
-                    await API.locationUpdate({
-                        location: secondLocation,
-                        qty: parseInt(count[secondLocation]) + parseInt(moveQty)
-                    }).then(() => {
-                        API.locationDelete(firstLocation);
-                        API.logCreate({
-                            logInId: currentUser.userId,
-                            location_1: firstLocation,
-                            location_2: secondLocation,
-                            qty: moveQty
-                        });
-                    })
-                };
+                    });
+                })
             } else {
                 await API.locationUpdate({
                     location: secondLocation,
@@ -261,6 +238,71 @@ function Main() {
             };
             fetchData();
         }
+        // ---------------------------------------------------
+        else {
+            e.target.className = "font-weight-bold text-center mt-1 mb-1 border rounded";
+            const moveQty = prompt("QTY : ");
+            const count = await API.locationRead();
+
+            console.log("FIRST LOCATION===>", count[firstLocation]);
+            console.log("SECOND LOCATION===>", count[secondLocation]);
+
+            if (count[firstLocation] == undefined || count[firstLocation] == 0) {
+                alert("No Stock");
+            } else if (parseInt(count[firstLocation]) - parseInt(moveQty) < 0 || isNaN(Number(moveQty)) || moveQty <= 0) {
+                alert("QTY Input Error");
+            } else if (count[secondLocation] == undefined) {
+                alert(secondLocation + " is not on the list anymore");
+            } else if (parseInt(count[firstLocation]) - parseInt(moveQty) == 0) {
+                if (firstLocation === "Aging Room") {
+                    await API.locationUpdate({
+                        location: secondLocation,
+                        qty: parseInt(count[secondLocation]) + parseInt(moveQty)
+                    }).then(() => {
+                        API.locationUpdate({
+                            location: firstLocation,
+                            qty: parseInt(count[firstLocation]) - parseInt(moveQty)
+                        });
+                        API.logCreate({
+                            logInId: currentUser.userId,
+                            location_1: firstLocation,
+                            location_2: secondLocation,
+                            qty: moveQty
+                        })
+                    })
+                } else {
+                    await API.locationUpdate({
+                        location: secondLocation,
+                        qty: parseInt(count[secondLocation]) + parseInt(moveQty)
+                    }).then(() => {
+                        API.locationDelete(firstLocation);
+                        API.logCreate({
+                            logInId: currentUser.userId,
+                            location_1: firstLocation,
+                            location_2: secondLocation,
+                            qty: moveQty
+                        })
+                    })
+                }
+            } else {
+                await API.locationUpdate({
+                    location: secondLocation,
+                    qty: parseInt(count[secondLocation]) + parseInt(moveQty)
+                }).then(() => {
+                    API.locationUpdate({
+                        location: firstLocation,
+                        qty: parseInt(count[firstLocation]) - parseInt(moveQty)
+                    });
+                    API.logCreate({
+                        logInId: currentUser.userId,
+                        location_1: firstLocation,
+                        location_2: secondLocation,
+                        qty: moveQty
+                    });
+                });
+            };
+            fetchData();
+        };
         fetchData();
     };
 
