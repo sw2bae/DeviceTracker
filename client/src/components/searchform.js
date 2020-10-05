@@ -9,7 +9,7 @@ function SearchForm({ handleSearch }) {
                 name="term"
                 type="text"
                 className="form-control"
-                placeholder="Search by User ID"
+                placeholder="Sort by Model"
             />
         </div>
 

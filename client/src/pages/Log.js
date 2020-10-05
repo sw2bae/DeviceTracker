@@ -16,7 +16,8 @@ function Log() {
     const [btnStatus, setBtnStatus] = useState({
         nummode: "⬇",
         location1: "⬇",
-        location2: "⬇"
+        location2: "⬇",
+        userId: "⬇"
     }
     );
 
@@ -29,6 +30,7 @@ function Log() {
                 data: data[i].date,
                 time: data[i].time,
                 userId: data[i].logInId,
+                model: data[i].model,
                 location1: data[i].location_1,
                 location2: data[i].location_2,
                 qty: data[i].qty
@@ -45,11 +47,11 @@ function Log() {
 
     function handleSearch(e) {
         const { value } = e.target;
-        let searchByUserId = logData.filter(logdata =>
-            new RegExp(value, "i").test(logdata.userId)
+        let searchByModel = logData.filter(logdata =>
+            new RegExp(value, "i").test(logdata.model)
         );
-        console.log(searchByUserId);
-        setFilteredLog(searchByUserId);
+        console.log(searchByModel);
+        setFilteredLog(searchByModel);
         console.log(filteredLog);
     }
 
@@ -89,7 +91,7 @@ function Log() {
         };
     };
 
-    function sortByCharLocation(e) {
+    function sortByChar(e) {
         const { id } = e.target;
         if (btnStatus[id] === "⬇") {
             setBtnStatus({ ...btnStatus, [id]: "⬆" });
@@ -135,7 +137,7 @@ function Log() {
                 <div className="container card mt-5 mb-5">
                     <SearchForm handleSearch={handleSearch} />
                     <table className="table table-striped mb-3">
-                        <LogHead btnStatus={btnStatus} sortByNum={sortByNum} sortByCharLocation={sortByCharLocation} />
+                        <LogHead btnStatus={btnStatus} sortByNum={sortByNum} sortByChar={sortByChar} />
                         <LogBody logData={filteredLog} />
                     </table>
                 </div>

@@ -13,6 +13,7 @@ function LogBody({ logData }) {
                         <td>{log.data}</td>
                         <td>{log.time}</td>
                         <td>{log.userId}</td>
+                        <td>{log.model}</td>
                         <td>{log.location1}</td>
                         <td>{log.location2}</td>
                         <td>{log.qty}</td>

@@ -1,13 +1,12 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-    const Location = sequelize.define(
-        'Location',
+    const Inventory = sequelize.define(
+        'Inventory',
         {
             location: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                unique: true,
                 validate: {
                     len: [1]
                 }
@@ -18,9 +17,16 @@ module.exports = (sequelize, DataTypes) => {
                 validate: {
                     len: [1]
                 }
+            },
+            model: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    len: [1]
+                }
             }
         }
     );
 
-    return Location;
+    return Inventory;
 };

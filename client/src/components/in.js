@@ -4,10 +4,12 @@ import { useLocationContext } from "../utils/LocationContext";
 function In({ onDragStart, onDragEnd, onDragOver, onDragEnter, onDragLeave, onDragDrop, plusBtn, minusBtn }) {
 
     const inventory = useLocationContext();
-
+    var para = document.location.href.split("/");
+    const currentModel = para[3];
     return (
-        <main className="card mt-5 mb-5 col-sm-2">
+        <main className="card mt-5 mb-sm-5 col-sm-2">
             <div className="mb-3" />
+            <h1 className="font-weight-bold text-center mt-1 mb-3">{currentModel}</h1>
             <p className="font-weight-bold text-center mt-1 mb-1 border rounded" draggable="true" id="Aging Room" onDragStart={onDragStart} onDragEnd={onDragEnd} onDragOver={onDragOver} onDragEnter={onDragEnter} onDragLeave={onDragLeave} onDrop={onDragDrop}  >Aging Room</p>
             <div className="container">
                 <div className="row">

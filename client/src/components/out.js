@@ -18,7 +18,7 @@ function Out({ onDragStart, onDragEnd, onDragOver, onDragEnter, onDragLeave, onD
 
     return (
         <>
-            <main className="card mt-5 mb-5 col-sm" onDragOver={onDragOver} onDragEnter={onDragEnter} onDragLeave={onDragLeave} onDrop={onDragDrop} id="OutBound">
+            <main className="card mt-5 mb-sm-5 col-sm" onDragOver={onDragOver} onDragEnter={onDragEnter} onDragLeave={onDragLeave} onDrop={onDragDrop} id="OutBound">
                 <div className="mt-3" />
                 {locations.map((location, index) => {
                     if (typeof (inventory) === "string") {
