@@ -1,5 +1,5 @@
 import axios from "axios";
-import { use } from "passport";
+// import { use } from "passport";
 export default {
     signUp: async function (userdata) {
         const data = await axios.post("/api/signup", userdata);
@@ -19,11 +19,11 @@ export default {
         return data;
     },
     locationAdd: async function (userdata) {
-        const data = await axios.post("/api/locationadd", userdata);
+        const data = await axios.post("/api/inventoryadd", userdata);
         return data.config.data;
     },
-    locationRead: async function () {
-        const { data } = await axios.get('api/locationread');
+    locationRead: async function (model) {
+        const { data } = await axios.get(`api/inventoryread/${model}`);
         if (data.length === 0) {
             return "none";
         } else {
@@ -37,25 +37,24 @@ export default {
             return inventory;
         }
     },
-    locationUpdate: async function (userdata) {
-        const data = await axios.put("api/locationupdate", userdata);
+    locationUpdate: async function (userdata, model) {
+        const data = await axios.put(`api/inventoryupdate/${model}`, userdata);
         return data;
     },
-    locationDelete: async function (location) {
-        const data = await axios.delete(`api/locationdelete/${location}`);
+    locationDelete: async function (location, model) {
+        const data = await axios.delete(`api/inventorydelete/${model}/${location}`,);
         return data;
     },
     logCreate: async function (userdata) {
         const { data } = await axios.post("api/logcreate", userdata);
-        // console.log(data);
         return data;
     },
     logRead: async function () {
         const { data } = await axios.get("api/logread");
         return data;
     },
-    dailyLog: async function () {
-        const { data } = await axios.get("api/dailyLog");
+    dailyLog: async function (model) {
+        const { data } = await axios.get(`api/dailyLog/${model}`);
         return data;
     }
 

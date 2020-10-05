@@ -38,37 +38,43 @@ apiRoutes.get("/checkAuthentication", isAuthenticated, (req, res) => {
         user: user,
     });
 });
-apiRoutes.get("/locationread", async (req, res) => {
-    const count = await db.Location.findAll({
+apiRoutes.get("/inventoryread/:model", async (req, res) => {
+    const count = await db.Inventory.findAll({
         attributes: [
             'location',
             'qty'
-        ]
+        ],
+        where: {
+            model: req.params.model
+        }
     });
     res.send(count);
+    console.log("LOG=====>", count);
 });
 
-apiRoutes.post("/locationadd", async (req, res) => {
-    const locationAdd = await db.Location.create(req.body);
+apiRoutes.post("/inventoryadd", async (req, res) => {
+    const locationAdd = await db.Inventory.create(req.body);
     res.json(locationAdd);
 })
 
 
-apiRoutes.put("/locationupdate", async (req, res) => {
-    const countUpdate = await db.Location.update(req.body, {
+apiRoutes.put("/inventoryupdate/:model", async (req, res) => {
+    const countUpdate = await db.Inventory.update(req.body, {
         where: {
-            location: req.body.location
+            location: req.body.location,
+            model: req.params.model
         }
     });
     // console.log(countUpdate);
     res.json(countUpdate);
 })
 
-apiRoutes.delete("/locationdelete/:location", async (req, res) => {
+apiRoutes.delete("/inventorydelete/:model/:location", async (req, res) => {
     // console.log("DELETE LOG : ", req.params.location);
-    const locationDelete = await db.Location.destroy({
+    const locationDelete = await db.Inventory.destroy({
         where: {
-            location: req.params.location
+            location: req.params.location,
+            model: req.params.model
         }
     });
     res.json(locationDelete);
@@ -85,7 +91,7 @@ apiRoutes.get("/logread", async (req, res) => {
     res.send(log);
 })
 
-apiRoutes.get("/dailyLog", async (req, res) => {
+apiRoutes.get("/dailyLog/:model", async (req, res) => {
     function leadingZeros(n, digits) {
         var zero = '';
         n = n.toString();
@@ -112,7 +118,8 @@ apiRoutes.get("/dailyLog", async (req, res) => {
             'qty'
         ],
         where: {
-            date: today
+            date: today,
+            model: req.params.model
         }
     });
     res.send(dailyLogRead);
