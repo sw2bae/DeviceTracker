@@ -3,6 +3,7 @@ import API from "../utils/API";
 import Header from "../components/header";
 // import { PieChart } from 'react-minimal-pie-chart';
 import Chart from "../components/chart";
+import Footer from "../components/footer";
 
 function Main() {
 
@@ -56,13 +57,14 @@ function Main() {
     return (
         <>
             <Header />
-            <main className="card mt-3">
+            <main className="card">
                 <div className="container">
                     <div className="row">
                         <Chart model1={model1} model2={model2} model3={model3} model1AgingRoom={model1AgingRoom} model2AgingRoom={model2AgingRoom} model3AgingRoom={model3AgingRoom} />
                     </div>
                 </div>
             </main>
+            <Footer />
         </>
     );
 }

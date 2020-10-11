@@ -42,7 +42,7 @@ function SignUp() {
     }
 
     return (
-        <main className="container card mt-5">
+        <main className="container card bg-info text-white mt-5 border-0">
             <h1 className="text-center mt-3 mb-3">MQL-KS</h1>
             <form onSubmit={submitHandler}>
                 <div className="form-group">
@@ -56,8 +56,8 @@ function SignUp() {
                     <input type="password" className="form-control" name="password2" id="password2"></input>
                 </div>
                 <button type="submit" className="btn btn-outline-info mb-5">Submit</button>
-                <p className="text-center alert alert-danger" role="alert" style={{ display: passwordErrorVis }}>Passwords don't match. Re-enter password</p>
-                <p className="text-center alert alert-danger" role="alert" style={{ display: passwordLengthVis }}>Password must contain at least 6 characters</p>
+                <p className="text-center alert alert-info font-weight-bold" role="alert" style={{ display: passwordErrorVis }}>Passwords don't match. Re-enter password</p>
+                <p className="text-center alert alert-info font-weight-bold" role="alert" style={{ display: passwordLengthVis }}>Password must contain at least 6 characters</p>
             </form>
         </main>
     );

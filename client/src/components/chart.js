@@ -30,7 +30,7 @@ function Chart({ model1, model2, model3, model1AgingRoom, model2AgingRoom, model
     return (
         <>
             <div className="card mt-5 mb-sm-5 col-sm-4">
-                <h1 className="font-weight-bold text-center mt-3"> 	🎨Palette </h1>
+                <h1 className="font-weight-bold text-center mt-3">TOTAL : </h1>
                 <h1 className="font-weight-bold text-center mt-3 mb-5"> {sum} EA.</h1>
                 <Link type="button" className="btn btn-info mb-3" to='/O1'>O1 : {model1} ea. </Link>
                 <p className="font-weight-bold">↳ [AgingRoom : {model1AgingRoom} ea.] + [OutBound : {model1 - model1AgingRoom} ea.]</p>

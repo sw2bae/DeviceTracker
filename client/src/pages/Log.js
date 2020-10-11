@@ -4,6 +4,7 @@ import Header from "../components/header";
 import LogHead from "../components/loghead";
 import LogBody from "../components/logbody";
 import SearchForm from "../components/searchform";
+import Footer from "../components/footer";
 
 
 // import { Link, useLocation } from "react-router-dom";
@@ -142,6 +143,7 @@ function Log() {
                     </table>
                 </div>
             </main>
+            <Footer />
         </>
     );
 }
