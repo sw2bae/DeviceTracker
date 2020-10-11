@@ -14,11 +14,11 @@ function Footer() {
 
 
     return (
-        <div>
-            <nav className="navbar fixed-bottom bg-info mt-5 rounded-0" id="footer">
-                <Link className="navbar-brand text-white mx-auto" onClick={handleLogout} >Log Out</Link>
-            </nav>
-        </div>
+
+        <nav className="navbar fixed-bottom bg-info mt-5 rounded-0" id="footer">
+            <Link className="navbar-brand text-white mx-auto" onClick={handleLogout} >Log Out</Link>
+        </nav>
+
 
     )
 }

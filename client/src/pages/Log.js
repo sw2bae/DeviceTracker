@@ -134,10 +134,10 @@ function Log() {
     return (
         <>
             <Header />
-            <main className="card mt-3">
-                <div className="container card mt-5 mb-5">
+            <main className="mt-3">
+                <div className="mt-5 mb-5">
                     <SearchForm handleSearch={handleSearch} />
-                    <table className="table table-striped mb-3">
+                    <table className="table table-striped mb-3 container-fluid">
                         <LogHead btnStatus={btnStatus} sortByNum={sortByNum} sortByChar={sortByChar} />
                         <LogBody logData={filteredLog} />
                     </table>

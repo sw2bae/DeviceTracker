@@ -329,7 +329,7 @@ function Main1() {
     return (
         <>
             <Header />
-            <main className="card mt-3">
+            <main className="mt-3">
                 <div className=" container">
                     <LocationProvider value={inventory}>
                         <div className="row">

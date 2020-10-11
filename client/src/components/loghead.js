@@ -4,7 +4,7 @@ import React from "react";
 function LogHead({ btnStatus, sortByNum, sortByChar }) {
 
     return (
-        <thead>
+        <thead className="bg-secondary" >
             <tr>
                 <th scope="col">Log #
     <button type="button" className="btn btn-link" onClick={sortByNum}>{btnStatus.nummode}</button>
@@ -23,7 +23,7 @@ function LogHead({ btnStatus, sortByNum, sortByChar }) {
                 </th>
                 <th scope="col" className="align-middle">QTY</th>
             </tr>
-        </thead>
+        </thead >
     );
 }
 

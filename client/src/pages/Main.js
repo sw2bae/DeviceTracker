@@ -57,7 +57,7 @@ function Main() {
     return (
         <>
             <Header />
-            <main className="card">
+            <main>
                 <div className="container">
                     <div className="row">
                         <Chart model1={model1} model2={model2} model3={model3} model1AgingRoom={model1AgingRoom} model2AgingRoom={model2AgingRoom} model3AgingRoom={model3AgingRoom} />
