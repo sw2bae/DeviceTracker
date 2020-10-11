@@ -38,7 +38,7 @@ function Out({ onDragStart, onDragEnd, onDragOver, onDragEnter, onDragLeave, onD
                 <table className="table table-striped mb-3">
 
                     <thead>
-                        <tr className="align-middle text-center">
+                        <tr className="align-middle text-center bg-secondary">
                             <th scope="col" >ID</th>
                             <th scope="col" >From</th>
                             <th scope="col" >To</th>
