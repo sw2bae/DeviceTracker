@@ -4,6 +4,7 @@ import Header from "../components/header";
 import In from "../components/in";
 import Out from "../components/out";
 import { LocationProvider } from "../utils/LocationContext";
+import Footer from "../components/footer";
 
 function Main2() {
     var para = document.location.href.split("/");
@@ -327,7 +328,7 @@ function Main2() {
     return (
         <>
             <Header />
-            <main className="card mt-3">
+            <main className="mt-3">
                 <div className=" container">
                     <LocationProvider value={inventory}>
                         <div className="row">
@@ -339,6 +340,7 @@ function Main2() {
                     </ LocationProvider>
                 </div>
             </main>
+            <Footer />
         </>
     );
 }

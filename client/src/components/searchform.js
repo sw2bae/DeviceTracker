@@ -3,12 +3,12 @@ import React from "react";
 function SearchForm({ handleSearch }) {
     return (
 
-        <div className="form-group container col-4 mt-3">
+        <div className="form-group container mt-3">
             <input
                 onChange={handleSearch}
                 name="term"
                 type="text"
-                className="form-control"
+                className="form-control text-center"
                 placeholder="Sort by Model"
             />
         </div>

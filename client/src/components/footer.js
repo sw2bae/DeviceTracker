@@ -1,34 +1,25 @@
 import React from "react";
-// import { Link, useLocation } from "react-router-dom";
+import API from "../utils/API";
+import { Link, useLocation } from "react-router-dom";
 
 function Footer() {
 
-    var style = {
-        backgroundColor: "#F8F8F8",
-        borderTop: "1px solid #E7E7E7",
-        textAlign: "center",
-        padding: "20px",
-        position: "fixed",
-        left: "0",
-        bottom: "0",
-        height: "60px",
-        width: "100%",
+    async function handleLogout(event) {
+        event.preventDefault();
+
+        await API.logOut();
+        window.location.replace("/");
     }
 
-    var phantom = {
-        display: 'block',
-        padding: '20px',
-        height: '60px',
-        width: '100%',
-    }
+
 
     return (
-        <div>
-            <div style={phantom} />
-            <div style={style}>
-                Contact : sw2.bae@samsung.com
-            </div>
-        </div>
+
+        <nav className="navbar fixed-bottom bg-info mt-5 rounded-0" id="footer">
+            <Link className="navbar-brand text-white mx-auto" onClick={handleLogout} >Log Out</Link>
+        </nav>
+
+
     )
 }
 
