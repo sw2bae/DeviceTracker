@@ -135,7 +135,7 @@ function Log() {
         <>
             <Header />
             <main className="mt-3">
-                <div className="mt-5 mb-5">
+                <div className="mb-5">
                     <SearchForm handleSearch={handleSearch} />
                     <table className="table table-striped mb-3 container-fluid">
                         <LogHead btnStatus={btnStatus} sortByNum={sortByNum} sortByChar={sortByChar} />

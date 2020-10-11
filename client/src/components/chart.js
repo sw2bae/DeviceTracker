@@ -30,7 +30,7 @@ function Chart({ model1, model2, model3, model1AgingRoom, model2AgingRoom, model
     return (
         <>
             <div className="mt-5 mb-sm-5 col-sm-6">
-                <h1 className="font-weight-bold text-center mt-3 mb-5">TOTAL : {sum} EA. </h1>
+                <h1 className="font-weight-bold text-center mt-sm-3 mb-5">TOTAL : {sum} EA. </h1>
                 <table className="table table-striped mb-3 container text-center ">
                     <thead>
                         <tr className="align-middle bg-secondary">
@@ -45,19 +45,19 @@ function Chart({ model1, model2, model3, model1AgingRoom, model2AgingRoom, model
                             <td className="font-weight-bold">O1</td>
                             <td>{model1AgingRoom} ea.</td>
                             <td>{model1 - model1AgingRoom} ea.</td>
-                            <td>{model1} ea.</td>
+                            <td className="font-weight-bold">{model1} ea.</td>
                         </tr>
                         <tr>
                             <td className="font-weight-bold">T2</td>
                             <td>{model2AgingRoom} ea.</td>
                             <td>{model2 - model2AgingRoom} ea.</td>
-                            <td>{model2} ea.</td>
+                            <td className="font-weight-bold">{model2} ea.</td>
                         </tr>
                         <tr>
                             <td className="font-weight-bold">P3</td>
                             <td>{model3AgingRoom} ea.</td>
                             <td>{model3 - model3AgingRoom} ea.</td>
-                            <td>{model3} ea.</td>
+                            <td className="font-weight-bold">{model3} ea.</td>
                         </tr>
                         <tr className="font-weight-bold bg-danger">
                             <td>Total</td>

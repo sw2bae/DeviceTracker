@@ -17,7 +17,7 @@ function Header() {
     }, []);
 
     return (
-        <nav className="bg-info navbar sticky-top navbar-expand-md p-sm-3 font-weight-bold">
+        <nav className="bg-info navbar sticky-top navbar-expand-lg p-sm-3 font-weight-bold">
             <div className="text-white ml-sm-3 navbar-brand">
                 <Link className="btn btn-info  p-0 pr-1 pl-1 pb-1" to='/main'><h2>🎨 Palette</h2>
                     <h5 className="mb-0">Welcome [{currentUser.userId}]</h5></Link>

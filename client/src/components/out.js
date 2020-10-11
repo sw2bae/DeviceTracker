@@ -33,11 +33,11 @@ function Out({ onDragStart, onDragEnd, onDragOver, onDragEnter, onDragLeave, onD
             </div>
             <div className="card mt-5 mb-5 col-sm">
                 <div className="mt-3" />
-                <h1 className="font-weight-bold text-center mt-1 mb-1"> Total : {sum}</h1>
+                <h1 className="font-weight-bold text-center mt-1 mb-1 border rounded"> Total : {sum}</h1>
                 <div className="mb-3" />
                 <table className="table table-striped mb-3">
 
-                    <thead className="bg-secondary">
+                    <thead>
                         <tr className="align-middle text-center">
                             <th scope="col" >ID</th>
                             <th scope="col" >From</th>
