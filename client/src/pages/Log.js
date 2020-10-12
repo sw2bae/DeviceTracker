@@ -132,19 +132,19 @@ function Log() {
 
 
     return (
-        <>
+        <div >
             <Header />
             <main className="mt-3">
                 <div className="mb-5">
                     <SearchForm handleSearch={handleSearch} />
-                    <table className="table table-striped mb-3 container-fluid">
+                    <table className="table table-striped mb-3">
                         <LogHead btnStatus={btnStatus} sortByNum={sortByNum} sortByChar={sortByChar} />
                         <LogBody logData={filteredLog} />
                     </table>
                 </div>
             </main>
             <Footer />
-        </>
+        </div>
     );
 }
 

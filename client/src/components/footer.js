@@ -15,7 +15,7 @@ function Footer() {
 
     return (
 
-        <nav className="navbar fixed-bottom bg-info mt-5 rounded-0 row d-flex pr-4 pl-4" id="footer">
+        <nav className="navbar fixed-bottom bg-info mt-5 rounded-0 row d-flex" id="footer">
             <Link className="btn btn-info navbar-brand text-white mx-auto pb-2 col" onClick={handleLogout} >Log Out</Link>
         </nav>
 

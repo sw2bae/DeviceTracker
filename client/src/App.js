@@ -44,7 +44,6 @@ class App extends Component {
           <ProtectedRoute exact={true} path="/P3/" component={Model3} isAuthenticated={this.state.isAuthenticated} />
           <ProtectedRoute exact={true} path="/log/" component={Log} isAuthenticated={this.state.isAuthenticated} />
         </Switch>
-
       </Router >
 
     );
