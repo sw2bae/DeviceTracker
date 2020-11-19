@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import API from "../utils/API"
 
+import { Link } from "react-router-dom";
 function SignUp() {
     const [passwordErrorVis, setPasswordErrorVis] = useState("none");
     const [passwordLengthVis, setPasswordLengthVis] = useState("none");
+    const [userIdErrorVis, setUserIdErrorVis] = useState("none");
 
     function submitHandler(event) {
         event.preventDefault();
@@ -12,7 +14,7 @@ function SignUp() {
         // individually in regards to displaying error messages
 
         if (event.target.password.value.length < 6) {
-            console.log(event.target.password.value);
+            // console.log(event.target.password.value);
             event.target.password.value = "";
             event.target.password2.value = "";
             setPasswordLengthVis("block");
@@ -55,10 +57,19 @@ function SignUp() {
                     <label for="password">Confirm Password</label>
                     <input type="password" className="form-control" name="password2" id="password2"></input>
                 </div>
-                <button type="submit" className="btn btn-secondary mt-3 mb-5">Submit</button>
+                <div className="mainBtn">
+                    <button type="submit" className="btn btn-secondary mt-3 mb-5">Submit</button>
+                    <Link to="/" className="btn btn-secondary mt-3 mb-5 ml-5">Back</Link>
+                </div>
                 <p className="text-center alert alert-info font-weight-bold" role="alert" style={{ display: passwordErrorVis }}>Passwords don't match. Re-enter password</p>
                 <p className="text-center alert alert-info font-weight-bold" role="alert" style={{ display: passwordLengthVis }}>Password must contain at least 6 characters</p>
+                <p className="text-center alert alert-info font-weight-bold" role="alert" style={{ display: userIdErrorVis }}>User ID Already Exists</p>
             </form>
+            <div>
+                <nav className="navbar fixed-bottom bg-info mt-5 rounded-0" id="footer">
+                    <a className="navbar-brand text-white mx-auto m-0 p-2" href="mailto:sw2.bae@samsung.com" >Contact : sw2.bae@samsung.com</a>
+                </nav>
+            </div>
         </main>
     );
 }

@@ -35,7 +35,10 @@ function LogIn() {
                     <label for="password">Password</label>
                     <input type="password" className="form-control" name="password" id="password"></input>
                 </div>
-                <button type="submit" className="btn btn-secondary mt-3 mb-5">Log In</button>
+                <div className="mainBtn">
+                    <button type="submit" className="btn btn-secondary mt-3 mb-5">Log In</button>
+                    <Link to="/signup" className="btn btn-secondary mt-3 mb-5 ml-5">Sign Up</Link>
+                </div>
             </form>
             <p className="text-center alert alert-info font-weight-bold" role="alert" style={{ display: loginUnauth }}>ID and Password pair not found</p>
 

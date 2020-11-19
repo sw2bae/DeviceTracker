@@ -37,7 +37,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={LogIn} />
-          <Route path="/onlysangbaecansignup" component={SignUp} />
+          <Route path="/signup/" component={SignUp} />
           <ProtectedRoute exact={true} path="/main/" component={Main} isAuthenticated={this.state.isAuthenticated} />
           <ProtectedRoute exact={true} path="/O1/" component={Model1} isAuthenticated={this.state.isAuthenticated} />
           <ProtectedRoute exact={true} path="/T2/" component={Model2} isAuthenticated={this.state.isAuthenticated} />

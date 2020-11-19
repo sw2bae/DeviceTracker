@@ -10,3 +10,8 @@ body {
   border-width: 3px !important;
   margin: 3px;
 }
+
+.mainBtn {
+  display: flex;
+  justify-content: center;
+}
